@@ -420,6 +420,8 @@ function showContextMenu (x, y, itemArray) {
 	}
 	if (x < 0) x = 0;
 	if (y < 0) y = 0;
+	x += document.body.scrollLeft;
+	y += document.body.scrollTop;
 	cmDiv.style.left = x.toString() + "px";
 	cmDiv.style.top = y.toString() + "px";
 	cmDiv.focus();
