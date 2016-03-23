@@ -72,7 +72,7 @@ body {
 }
 
 .cool-contextmenu {
-	position: fixed;
+	position: absolute;
 	border: none;
 	overflow: none;
 }
