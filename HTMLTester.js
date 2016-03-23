@@ -200,14 +200,18 @@ function TesterUpdate() {
 	tempFrame.contentDocument.write(getMixedEditor().getValue());
 	tempFrame.contentDocument.close();*/
 	renderHtml(getMixedEditor().getValue(), tempFrame.id);
-	var css = tempFrame.contentDocument.createElement("style");
-	css.type = "text/css";
-	css.appendChild(tempFrame.contentDocument.createTextNode(getCSSEditor().getValue()));
-	tempFrame.contentDocument.head.appendChild(css);
-	var js = tempFrame.contentDocument.createElement("script");
-	js.type = "text/javascript";
-	js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
-	tempFrame.contentDocument.head.appendChild(js);
+	if (getCSSEditor().getValue().trim().length > 1) {
+		var css = tempFrame.contentDocument.createElement("style");
+		css.type = "text/css";
+		css.appendChild(tempFrame.contentDocument.createTextNode(getCSSEditor().getValue()));
+		tempFrame.contentDocument.head.appendChild(css);
+	}
+	if (getJSEditor().getValue().trim().length > 1) {
+		var js = tempFrame.contentDocument.createElement("script");
+		js.type = "text/javascript";
+		js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
+		tempFrame.contentDocument.head.appendChild(js);
+	}
 	var head = tempFrame.contentDocument.head.outerHTML;
 	var body = tempFrame.contentDocument.body.outerHTML;
 	document.body.removeChild(tempFrame);
