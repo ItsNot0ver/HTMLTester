@@ -191,31 +191,36 @@ function TesterLoad() {
 }
 
 function TesterUpdate() {
-	var tempFrame = document.createElement("iframe");
-	tempFrame.id = "tempFrame_" + randomGuid();
-	tempFrame.style.display = "none";
-	tempFrame.sandbox = "allow-same-origin";
-	document.body.appendChild(tempFrame);
-	/*tempFrame.contentDocument.open();
-	tempFrame.contentDocument.write(getMixedEditor().getValue());
-	tempFrame.contentDocument.close();*/
-	renderHtml(getMixedEditor().getValue(), tempFrame.id);
-	if (getCSSEditor().getValue().trim().length > 1) {
-		var css = tempFrame.contentDocument.createElement("style");
-		css.type = "text/css";
-		css.appendChild(tempFrame.contentDocument.createTextNode(getCSSEditor().getValue()));
-		tempFrame.contentDocument.head.appendChild(css);
+	var addCss = getJSEditor().getValue().trim().length > 1;
+	var addJs = getJSEditor().getValue().trim().length > 1;
+	if (addCss || addJs) {
+		var tempFrame = document.createElement("iframe");
+		tempFrame.id = "tempFrame_" + randomGuid();
+		tempFrame.style.display = "none";
+		tempFrame.sandbox = "allow-same-origin";
+		document.body.appendChild(tempFrame);
+		/*tempFrame.contentDocument.open();
+		tempFrame.contentDocument.write(getMixedEditor().getValue());
+		tempFrame.contentDocument.close();*/
+		renderHtml(getMixedEditor().getValue(), tempFrame.id);
+		if (addCss) {
+			var css = tempFrame.contentDocument.createElement("style");
+			css.type = "text/css";
+			css.appendChild(tempFrame.contentDocument.createTextNode(getCSSEditor().getValue()));
+			tempFrame.contentDocument.head.appendChild(css);
+		}
+		if (addJs) {
+			var js = tempFrame.contentDocument.createElement("script");
+			js.type = "text/javascript";
+			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
+			tempFrame.contentDocument.head.appendChild(js);
+		}
+		var head = tempFrame.contentDocument.head.outerHTML;
+		var body = tempFrame.contentDocument.body.outerHTML;
+		document.body.removeChild(tempFrame);
+		renderHtml("<html>\n\t" + head + "\n\t" + body + "\n</html>\n", "TesterResult");
 	}
-	if (getJSEditor().getValue().trim().length > 1) {
-		var js = tempFrame.contentDocument.createElement("script");
-		js.type = "text/javascript";
-		js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
-		tempFrame.contentDocument.head.appendChild(js);
-	}
-	var head = tempFrame.contentDocument.head.outerHTML;
-	var body = tempFrame.contentDocument.body.outerHTML;
-	document.body.removeChild(tempFrame);
-	renderHtml("<html>\n\t" + head + "\n\t" + body + "\n</html>\n", "TesterResult");
+	else renderHtml(getMixedEditor().getValue(), "TesterResult");
 	// OLD WAY
 	/*renderHtml(getMixedEditor().getValue(), "TesterResult"); 
 	var frame = document.getElementById("TesterResult");
