@@ -338,7 +338,7 @@ function TesterImageOpen() {
 							}
 						},
 						{ 
-							description: "Delete Image", 
+							description: "Remove Image", 
 							action: function() { pasteZone.removeChild(textArea); } 
 						}
 					]);
@@ -435,35 +435,35 @@ function splitStringEvery(str, n) {
 
 function textareaToEditor(textareaId, withResult) {
 	var txtArea = document.getElementById(textareaId);
-  if (txtArea.tagName.toLowerCase() == "textarea") {
-    var container = txtArea.parentNode;
-    var txt = txtArea.value;
-    var table = document.createElement("table");
-    table.style.width = txtArea.style.width;
-    table.style.height = txtArea.style.height;
-    var tr = document.createElement("tr");
-    table.appendChild(tr);
-    var leftTd = document.createElement("td");
-    tr.appendChild(leftTd);
-    if (withResult) {
-	    var rightTd = document.createElement("td");
-	    tr.appendChild(rightTd);
-	    leftTd.style.width = "50%";
-	    rightTd.style.width = "50%";
-  	}
-  	else {
-  		leftTd.style.width = "100%";
-  	}
-    container.style.margin = "0";
+	if (txtArea.tagName.toLowerCase() == "textarea") {
+		var container = txtArea.parentNode;
+		var txt = txtArea.value;
+		var table = document.createElement("table");
+		table.style.width = txtArea.style.width;
+		table.style.height = txtArea.style.height;
+		var tr = document.createElement("tr");
+		table.appendChild(tr);
+		var leftTd = document.createElement("td");
+		tr.appendChild(leftTd);
+		if (withResult) {
+			var rightTd = document.createElement("td");
+			tr.appendChild(rightTd);
+			leftTd.style.width = "50%";
+			rightTd.style.width = "50%";
+		}
+		else {
+			leftTd.style.width = "100%";
+		}
+		container.style.margin = "0";
 		container.style.padding = "0";
-    container.insertBefore(table, txtArea);
-    container.removeChild(txtArea);
-    var div = document.createElement("div");
-    div.id = textareaId;
-    div.style.width = "100%";
-    div.style.height = "100%";
-    setCoolBorder(div);
-    leftTd.appendChild(div);
+		container.insertBefore(table, txtArea);
+		container.removeChild(txtArea);
+		var div = document.createElement("div");
+		div.id = textareaId;
+		div.style.width = "100%";
+		div.style.height = "100%";
+		setCoolBorder(div);
+		leftTd.appendChild(div);
 		var editor = ace.edit(textareaId);
 		editor.session.setMode("ace/mode/html");
 		editor.setTheme("ace/theme/eclipse");
@@ -500,7 +500,7 @@ function TesterGeneratePageUrl() {
 		 + (js.trim().length > 0 ? (html.trim().length > 0 ? "&" : "") + "js=" + encodeURIComponent(js) : "")
 		 + (css.trim().length > 0 ? (html.trim().length > 0 || js.trim().length > 0 ? "&" : "") + "css=" + encodeURIComponent(css) : "");
 	var textArea = document.createElement("textarea");
-	textArea.id = "image_" + randomGuid();
+	textArea.id = "page_" + randomGuid();
 	textArea.className = "cool-border";
 	textArea.value = qs;
 	textArea.style.width = "100%";
@@ -520,7 +520,7 @@ function TesterGeneratePageUrl() {
 				}
 			},
 			{ 
-				description: "Delete URL", 
+				description: "Remove URL", 
 				action: function() { pasteZone.removeChild(textArea); } 
 			}
 		]);
