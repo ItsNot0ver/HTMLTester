@@ -490,6 +490,45 @@ function textareaToEditor(textareaId, withResult) {
 	}
 }
 
+function TesterGeneratePageUrl() {
+	var pasteZone = document.getElementById("pasteZone");
+	var html = getMixedEditor().getValue();
+	var js = getJsEditor().getValue();
+	var css = getCssEditor().getValue();
+	var qs = window.location.origin + window.location.pathname + "?"
+		 + (html.trim().length > 0 ? "html=" + encodeURIComponent(html) : "")
+		 + (js.trim().length > 0 ? (html.trim().length > 0 ? "&" : "") + "js=" + encodeURIComponent(js) : "")
+		 + (css.trim().length > 0 ? (html.trim().length > 0 || js.trim().length > 0 ? "&" : "") + "css=" + encodeURIComponent(css) : "");
+	var textArea = document.createElement("textarea");
+	textArea.id = "image_" + randomGuid();
+	textArea.className = "cool-border";
+	textArea.value = qs;
+	textArea.style.width = "100%";
+	textArea.style.height = "100px";
+	textArea.style.background = "white";
+	textArea.style.resize = "none";
+	textArea.style.marginBottom = "10px";
+	textArea.readOnly = true;
+	textArea.oncontextmenu = function(e) {
+		e.returnValue = false;
+		showContextMenu(e.x, e.y, [
+			{ 
+				description: "Copy URL", 
+				action: function() {
+					textArea.select();
+					document.execCommand('copy');
+				}
+			},
+			{ 
+				description: "Delete URL", 
+				action: function() { pasteZone.removeChild(textArea); } 
+			}
+		]);
+		return false;
+	};
+	pasteZone.appendChild(textArea);
+}
+
 function queryString(key) {
     var url = window.location.href;
     var queryStringStart = url.indexOf("?");
