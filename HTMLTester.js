@@ -261,6 +261,7 @@ function TesterRealTime() {
 }
 
 function TesterFullScreen() {
+	document.body.style.overflow = "hidden";
 	var frame = document.getElementById("TesterResult");
 	var oldClass = frame.className;
 	frame.className = "full-screen";
@@ -275,6 +276,7 @@ function TesterFullScreen() {
 	closeButton.onclick = function() {
 		document.body.removeChild(closeButtonDiv);
 		frame.className = oldClass;
+		document.body.style.overflow = "auto";
 	};
 	closeButtonDiv.appendChild(closeButton);
 	document.body.appendChild(closeButtonDiv);
