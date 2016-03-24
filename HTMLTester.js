@@ -164,27 +164,27 @@ function TesterLoad() {
 	document.getElementById("TesterJS").classList.add("cool-border");
 	document.getElementById("TesterCSS").classList.add("cool-border");
 	
-	var defaultTestHtml = "<!DOCTYPE html>\n<html>\n\t<head>\n\t\t\n\t</head>\n\t<body>\n\t\t\n\t</body>\n</html>\n";
-	/*'<!DOCTYPE html>\n' +
-	'<html>\n' +
-	'\t<head>\n' +
-	'\t\t<script type="text/javascript">\n' +
-	'\t\t\tfunction sayHello() {\n' +
-	'\t\t\t\tvar text = document.createElement("p");\n' +
-	'\t\t\t\ttext.appendChild(document.createTextNode("Hello!"));\n' +
-	'\t\t\t\tdocument.body.appendChild(text);\n' +
-	'\t\t\t}\n' +
-	'\t\t</' + 'script>\n' +
-	'\t</head>\n' +
-	'\t<body>\n' +
-	'\t\t<button onclick="sayHello()">Hello</button>\n' +
-	'\t</body>\n' +
-	'</html>\n';*/
-	
-	editor.setValue(defaultTestHtml);
-	editor.clearSelection();
-	//renderHtml(defaultTestHtml, "TesterResult");
-	
+	var html = queryString("html");
+	if (html != null) {
+		editor.setValue(html);
+		editor.clearSelection();	
+	}
+	else {
+		var defaultTestHtml = "<!DOCTYPE html>\n<html>\n\t<head>\n\t\t\n\t</head>\n\t<body>\n\t\t\n\t</body>\n</html>\n";
+		editor.setValue(defaultTestHtml);
+		editor.clearSelection();
+	}
+	var js = queryString("js");
+	if (js != null) {
+		jsEditor.setValue(js);
+		jsEditor.clearSelection();
+	}
+	var css = queryString("css");
+	if (css != null) {
+		cssEditor.setValue(css);
+		cssEditor.clearSelection();
+	}
+	TesterUpdate();
 	editor.getSession().on('change', TesterOnCodeChange);
 	jsEditor.getSession().on('change', TesterOnCodeChange);
 	cssEditor.getSession().on('change', TesterOnCodeChange);
@@ -338,7 +338,7 @@ function TesterImageOpen() {
 							}
 						},
 						{ 
-							description: "Delete Image", 
+							description: "Remove Image", 
 							action: function() { pasteZone.removeChild(textArea); } 
 						}
 					]);
@@ -435,35 +435,35 @@ function splitStringEvery(str, n) {
 
 function textareaToEditor(textareaId, withResult) {
 	var txtArea = document.getElementById(textareaId);
-  if (txtArea.tagName.toLowerCase() == "textarea") {
-    var container = txtArea.parentNode;
-    var txt = txtArea.value;
-    var table = document.createElement("table");
-    table.style.width = txtArea.style.width;
-    table.style.height = txtArea.style.height;
-    var tr = document.createElement("tr");
-    table.appendChild(tr);
-    var leftTd = document.createElement("td");
-    tr.appendChild(leftTd);
-    if (withResult) {
-	    var rightTd = document.createElement("td");
-	    tr.appendChild(rightTd);
-	    leftTd.style.width = "50%";
-	    rightTd.style.width = "50%";
-  	}
-  	else {
-  		leftTd.style.width = "100%";
-  	}
-    container.style.margin = "0";
+	if (txtArea.tagName.toLowerCase() == "textarea") {
+		var container = txtArea.parentNode;
+		var txt = txtArea.value;
+		var table = document.createElement("table");
+		table.style.width = txtArea.style.width;
+		table.style.height = txtArea.style.height;
+		var tr = document.createElement("tr");
+		table.appendChild(tr);
+		var leftTd = document.createElement("td");
+		tr.appendChild(leftTd);
+		if (withResult) {
+			var rightTd = document.createElement("td");
+			tr.appendChild(rightTd);
+			leftTd.style.width = "50%";
+			rightTd.style.width = "50%";
+		}
+		else {
+			leftTd.style.width = "100%";
+		}
+		container.style.margin = "0";
 		container.style.padding = "0";
-    container.insertBefore(table, txtArea);
-    container.removeChild(txtArea);
-    var div = document.createElement("div");
-    div.id = textareaId;
-    div.style.width = "100%";
-    div.style.height = "100%";
-    setCoolBorder(div);
-    leftTd.appendChild(div);
+		container.insertBefore(table, txtArea);
+		container.removeChild(txtArea);
+		var div = document.createElement("div");
+		div.id = textareaId;
+		div.style.width = "100%";
+		div.style.height = "100%";
+		setCoolBorder(div);
+		leftTd.appendChild(div);
 		var editor = ace.edit(textareaId);
 		editor.session.setMode("ace/mode/html");
 		editor.setTheme("ace/theme/eclipse");
@@ -489,3 +489,63 @@ function textareaToEditor(textareaId, withResult) {
 		}
 	}
 }
+
+function TesterGeneratePageUrl() {
+	var pasteZone = document.getElementById("pasteZone");
+	var html = getMixedEditor().getValue();
+	var js = getJSEditor().getValue();
+	var css = getCSSEditor().getValue();
+	var qs = window.location.origin + window.location.pathname + "?"
+		 + (html.trim().length > 0 ? "html=" + encodeURIComponent(html) : "")
+		 + (js.trim().length > 0 ? (html.trim().length > 0 ? "&" : "") + "js=" + encodeURIComponent(js) : "")
+		 + (css.trim().length > 0 ? (html.trim().length > 0 || js.trim().length > 0 ? "&" : "") + "css=" + encodeURIComponent(css) : "");
+	var textArea = document.createElement("textarea");
+	textArea.id = "page_" + randomGuid();
+	textArea.className = "cool-border";
+	textArea.value = qs;
+	textArea.style.width = "100%";
+	textArea.style.height = "100px";
+	textArea.style.background = "white";
+	textArea.style.resize = "none";
+	textArea.style.marginBottom = "10px";
+	textArea.readOnly = true;
+	textArea.oncontextmenu = function(e) {
+		e.returnValue = false;
+		showContextMenu(e.x, e.y, [
+			{ 
+				description: "Copy URL", 
+				action: function() {
+					textArea.select();
+					document.execCommand('copy');
+				}
+			},
+			{ 
+				description: "Remove URL", 
+				action: function() { pasteZone.removeChild(textArea); } 
+			}
+		]);
+		return false;
+	};
+	pasteZone.appendChild(textArea);
+}
+
+function queryString(key) {
+    var url = window.location.href;
+    var queryStringStart = url.indexOf("?");
+    if (queryStringStart > 0) {
+        key = key.toLowerCase();
+        var args = url.substring(queryStringStart+1).split("&");
+        for (var i = 0; i < args.length; i++) {
+            var equals = args[i].indexOf("=");
+            if (equals > 0) {
+                var argKey = args[i].substring(0, equals);
+                if (argKey.toLowerCase() == key) {
+                    return decodeURIComponent(args[i].substring(equals+1));
+                }
+            }
+            else if (args[i].toLowerCase() == key) return null;
+        }
+    }
+    return null;
+}
+
