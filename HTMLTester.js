@@ -261,6 +261,7 @@ function TesterRealTime() {
 }
 
 function TesterFullScreen() {
+	document.body.style.overflow = "hidden";
 	var frame = document.getElementById("TesterResult");
 	var oldClass = frame.className;
 	frame.className = "full-screen";
@@ -275,6 +276,7 @@ function TesterFullScreen() {
 	closeButton.onclick = function() {
 		document.body.removeChild(closeButtonDiv);
 		frame.className = oldClass;
+		document.body.style.overflow = "auto";
 	};
 	closeButtonDiv.appendChild(closeButton);
 	document.body.appendChild(closeButtonDiv);
@@ -314,7 +316,7 @@ function TesterImageOpen() {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				var pasteZone = document.getElementById("pasteZone");
-				var html = '<img src="' + e.target.result + '" />';
+				var html = '<img src="' + splitStringEvery(e.target.result, 30000).join("\n") + '" />';
 				var textArea = document.createElement("textarea");
 				textArea.id = "image_" + randomGuid();
 				textArea.className = "cool-border";
@@ -425,6 +427,10 @@ function showContextMenu (x, y, itemArray) {
 	cmDiv.style.left = x.toString() + "px";
 	cmDiv.style.top = y.toString() + "px";
 	cmDiv.focus();
+}
+
+function splitStringEvery(str, n) {
+    return str.match(new RegExp("[\\s\\S]{1," + n + "}", "g")) || [];
 }
 
 function textareaToEditor(textareaId, withResult) {
