@@ -164,27 +164,27 @@ function TesterLoad() {
 	document.getElementById("TesterJS").classList.add("cool-border");
 	document.getElementById("TesterCSS").classList.add("cool-border");
 	
-	var defaultTestHtml = "<!DOCTYPE html>\n<html>\n\t<head>\n\t\t\n\t</head>\n\t<body>\n\t\t\n\t</body>\n</html>\n";
-	/*'<!DOCTYPE html>\n' +
-	'<html>\n' +
-	'\t<head>\n' +
-	'\t\t<script type="text/javascript">\n' +
-	'\t\t\tfunction sayHello() {\n' +
-	'\t\t\t\tvar text = document.createElement("p");\n' +
-	'\t\t\t\ttext.appendChild(document.createTextNode("Hello!"));\n' +
-	'\t\t\t\tdocument.body.appendChild(text);\n' +
-	'\t\t\t}\n' +
-	'\t\t</' + 'script>\n' +
-	'\t</head>\n' +
-	'\t<body>\n' +
-	'\t\t<button onclick="sayHello()">Hello</button>\n' +
-	'\t</body>\n' +
-	'</html>\n';*/
-	
-	editor.setValue(defaultTestHtml);
-	editor.clearSelection();
-	//renderHtml(defaultTestHtml, "TesterResult");
-	
+	var html = queryString("html");
+	if (html != null) {
+		editor.setValue(html);
+		editor.clearSelection();	
+	}
+	else {
+		var defaultTestHtml = "<!DOCTYPE html>\n<html>\n\t<head>\n\t\t\n\t</head>\n\t<body>\n\t\t\n\t</body>\n</html>\n";
+		editor.setValue(defaultTestHtml);
+		editor.clearSelection();
+	}
+	var js = queryString("js");
+	if (js != null) {
+		jsEditor.setValue(js);
+		jsEditor.clearSelection();
+	}
+	var css = queryString("css");
+	if (css != null) {
+		cssEditor.setValue(css);
+		cssEditor.clearSelection();
+	}
+	TesterUpdate();
 	editor.getSession().on('change', TesterOnCodeChange);
 	jsEditor.getSession().on('change', TesterOnCodeChange);
 	cssEditor.getSession().on('change', TesterOnCodeChange);
@@ -489,3 +489,24 @@ function textareaToEditor(textareaId, withResult) {
 		}
 	}
 }
+
+function queryString(key) {
+    var url = window.location.href;
+    var queryStringStart = url.indexOf("?");
+    if (queryStringStart > 0) {
+        key = key.toLowerCase();
+        var args = url.substring(queryStringStart+1).split("&");
+        for (var i = 0; i < args.length; i++) {
+            var equals = args[i].indexOf("=");
+            if (equals > 0) {
+                var argKey = args[i].substring(0, equals);
+                if (argKey.toLowerCase() == key) {
+                    return decodeURIComponent(args[i].substring(equals+1));
+                }
+            }
+            else if (args[i].toLowerCase() == key) return null;
+        }
+    }
+    return null;
+}
+
