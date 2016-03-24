@@ -493,8 +493,8 @@ function textareaToEditor(textareaId, withResult) {
 function TesterGeneratePageUrl() {
 	var pasteZone = document.getElementById("pasteZone");
 	var html = getMixedEditor().getValue();
-	var js = getJsEditor().getValue();
-	var css = getCssEditor().getValue();
+	var js = getJSEditor().getValue();
+	var css = getCSSEditor().getValue();
 	var qs = window.location.origin + window.location.pathname + "?"
 		 + (html.trim().length > 0 ? "html=" + encodeURIComponent(html) : "")
 		 + (js.trim().length > 0 ? (html.trim().length > 0 ? "&" : "") + "js=" + encodeURIComponent(js) : "")
