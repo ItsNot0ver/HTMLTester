@@ -184,7 +184,7 @@ function TesterLoad() {
 		cssEditor.setValue(css);
 		cssEditor.clearSelection();
 	}
-	TesterUpdate();
+	//TesterUpdate();
 	editor.getSession().on('change', TesterOnCodeChange);
 	jsEditor.getSession().on('change', TesterOnCodeChange);
 	cssEditor.getSession().on('change', TesterOnCodeChange);
