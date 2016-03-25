@@ -246,7 +246,7 @@ function TesterClear() {
 	else if (document.getElementById("TesterCSS").style.display != "none") {
 		getCSSEditor().setValue("");
 	}
-	TesterUpdate();
+	//TesterUpdate();
 }
 
 function TesterOnCodeChange() {
