@@ -44,7 +44,12 @@ function switchToCSS() {
 function renderHtml(html, iframeId) {
 	var iframe = document.getElementById(iframeId);
 	iframe.contentDocument.open();
-	iframe.contentDocument.write(html);
+	try {
+		iframe.contentDocument.write(html);
+	}
+	catch (ex) {
+		// Do nothing
+	}
 	iframe.contentDocument.close();
 	return iframe;
 }
@@ -64,18 +69,18 @@ function refreshScripts (container) {
 }
 
 function download(text, fileName, type) {
-  var file = new Blob([text], {type: type});
-  if (typeof navigator.msSaveOrOpenBlob != "undefined") {
-  	navigator.msSaveOrOpenBlob(file, fileName);
-  }
-  else {
-  	var a = document.createElement("a");
-	  a.href = URL.createObjectURL(file);
-	  a.download = fileName;
-	  a.style.display = "none";
-	  document.body.appendChild(a);
-	  try {
-		  if (document.createEvent) {
+	var file = new Blob([text], {type: type});
+	if (typeof navigator.msSaveOrOpenBlob != "undefined") {
+		navigator.msSaveOrOpenBlob(file, fileName);
+	}
+	else {
+	  	var a = document.createElement("a");
+		a.href = URL.createObjectURL(file);
+		a.download = fileName;
+		a.style.display = "none";
+		document.body.appendChild(a);
+		try {
+			if (document.createEvent) {
 				var e = document.createEvent("MouseEvents");
 				e.initEvent("click", true, true);
 				a.dispatchEvent(e);
@@ -213,7 +218,12 @@ function TesterUpdate() {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
 			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
-			tempFrame.contentDocument.head.appendChild(js);
+			try {
+				tempFrame.contentDocument.head.appendChild(js);
+			}
+			catch (ex) {
+				// Do nothing
+			}
 		}
 		var head = tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
