@@ -44,12 +44,7 @@ function switchToCSS() {
 function renderHtml(html, iframeId) {
 	var iframe = document.getElementById(iframeId);
 	iframe.contentDocument.open();
-	try {
-		iframe.contentDocument.write(html);
-	}
-	catch (ex) {
-		// Do nothing
-	}
+	iframe.contentDocument.write(html);
 	iframe.contentDocument.close();
 	return iframe;
 }
@@ -196,7 +191,7 @@ function TesterLoad() {
 }
 
 function TesterUpdate() {
-	var addCss = getJSEditor().getValue().trim().length > 1;
+	var addCss = getCSSEditor().getValue().trim().length > 1;
 	var addJs = getJSEditor().getValue().trim().length > 1;
 	if (addCss || addJs) {
 		var tempFrame = document.createElement("iframe");
@@ -218,12 +213,7 @@ function TesterUpdate() {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
 			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
-			try {
-				tempFrame.contentDocument.head.appendChild(js);
-			}
-			catch (ex) {
-				// Do nothing
-			}
+			tempFrame.contentDocument.head.appendChild(js);
 		}
 		var head = tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
