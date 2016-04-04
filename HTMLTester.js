@@ -491,7 +491,7 @@ function textareaToEditor(textareaId, withResult) {
 }
 
 function encryptText(text) {
-	var status = { result: null, progress = 0 };
+	var status = { result: null, progress: 0 };
 	LZMA.compress(text, 1, function onSuccess(result) {
 		status.result = result;
 	}, function onProgress(percent) {
