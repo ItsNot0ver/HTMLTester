@@ -491,27 +491,6 @@ function textareaToEditor(textareaId, withResult) {
 }
 
 function encryptText(text) {
-	/*var compression_mode = 1,
-    my_lzma = LZMA; /// lzma_worker.js creates a global LZMA object. We store it as a new variable just to match simple_demo.html.
-
-document.getElementById("go").onclick = function () {
-    /// First, let's compress it.
-    my_lzma.compress(document.getElementById("compression_el").value, compression_mode, function on_compress_complete(result) {
-        alert("Compressed: " + result);
-        
-        /// Now, let's try to decompress it to make sure it works both ways.
-        my_lzma.decompress(result, function on_decompress_complete(result) {
-            alert("Decompressed: " + result);
-        }, function on_decompress_progress_update(percent) {
-            /// Decompressing progress code goes here.
-            document.title = "Decompressing: " + (percent * 100) + "%";
-        });
-    }, function on_compress_progress_update(percent) {
-        /// Compressing progress code goes here.
-        document.title = "Compressing: " + (percent * 100) + "%";
-    });
-}
-*/
 	var status = { result: null, progress = 0 };
 	LZMA.compress(text, 1, function onSuccess(result) {
 		status.result = result;
@@ -523,7 +502,6 @@ document.getElementById("go").onclick = function () {
 }
 
 function TesterGeneratePageUrl() {
-	debugger;
 	if (typeof LZMA == "undefined") return;
 	var pasteZone = document.getElementById("pasteZone");
 	var html = encryptText(getMixedEditor().getValue());
