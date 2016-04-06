@@ -502,7 +502,6 @@ function encryptText(text) {
 }
 
 function TesterGeneratePageUrl() {
-	if (typeof LZMA == "undefined") return;
 	var pasteZone = document.getElementById("pasteZone");
 	var html = LZString.compressToEncodedURIComponent(getMixedEditor().getValue());
 	var js = LZString.compressToEncodedURIComponent(getJSEditor().getValue());
