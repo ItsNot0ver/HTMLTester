@@ -166,7 +166,7 @@ function TesterLoad() {
 	
 	var html = queryString("html");
 	if (html != null) {
-		editor.setValue(html);
+		editor.setValue(LZString.decompressFromBase64(html));
 		editor.clearSelection();	
 	}
 	else {
@@ -176,12 +176,12 @@ function TesterLoad() {
 	}
 	var js = queryString("js");
 	if (js != null) {
-		jsEditor.setValue(js);
+		jsEditor.setValue(LZString.decompressFromBase64(js));
 		jsEditor.clearSelection();
 	}
 	var css = queryString("css");
 	if (css != null) {
-		cssEditor.setValue(css);
+		cssEditor.setValue(LZString.decompressFromBase64(css));
 		cssEditor.clearSelection();
 	}
 	//TesterUpdate();
@@ -504,13 +504,13 @@ function encryptText(text) {
 function TesterGeneratePageUrl() {
 	if (typeof LZMA == "undefined") return;
 	var pasteZone = document.getElementById("pasteZone");
-	var html = encryptText(getMixedEditor().getValue());
-	var js = encryptText(getJSEditor().getValue());
-	var css = encryptText(getCSSEditor().getValue());
+	var html = LZString.compressToEncodedURIComponent(getMixedEditor().getValue());
+	var js = LZString.compressToEncodedURIComponent(getJSEditor().getValue());
+	var css = LZString.compressToEncodedURIComponent(getCSSEditor().getValue());
 	var qs = window.location.origin + window.location.pathname + "?"
-		 + (html.trim().length > 0 ? "html=" + encodeURIComponent(html) : "")
-		 + (js.trim().length > 0 ? (html.trim().length > 0 ? "&" : "") + "js=" + encodeURIComponent(js) : "")
-		 + (css.trim().length > 0 ? (html.trim().length > 0 || js.trim().length > 0 ? "&" : "") + "css=" + encodeURIComponent(css) : "");
+		 + (html.trim().length > 0 ? "html=" + html : "")
+		 + (js.trim().length > 0 ? (html.trim().length > 0 ? "&" : "") + "js=" + js : "")
+		 + (css.trim().length > 0 ? (html.trim().length > 0 || js.trim().length > 0 ? "&" : "") + "css=" + css : "");
 	var textArea = document.createElement("textarea");
 	textArea.id = "page_" + randomGuid();
 	textArea.className = "cool-border";
