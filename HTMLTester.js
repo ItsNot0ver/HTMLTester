@@ -493,15 +493,15 @@ function textareaToEditor(textareaId, withResult) {
 function TesterGeneratePageUrl() {
 	var pasteZone = document.getElementById("pasteZone");
 	var html = getMixedEditor().getValue();
-	if (html.trim().length > 0) html = LZString.compressToEncodedURIComponent(html);
+	if (html.trim().length > 0) html = LZString.compressToBase64(html);
 	var js = getJSEditor().getValue();
-	if (js.trim().length > 0) js = LZString.compressToEncodedURIComponent(js);
+	if (js.trim().length > 0) js = LZString.compressToBase64(js);
 	var css = getCSSEditor().getValue();
-	if (css.trim().length > 0) css = LZString.compressToEncodedURIComponent(css);
+	if (css.trim().length > 0) css = LZString.compressToBase64(css);
 	var qs = window.location.origin + window.location.pathname + "?"
-		 + (html.length > 0 ? "html=" + html : "")
-		 + (js.length > 0 ? (html.length > 0 ? "&" : "") + "js=" + js : "")
-		 + (css.length > 0 ? (html.length > 0 || js.length > 0 ? "&" : "") + "css=" + css : "");
+		 + (html.length > 0 ? "html=" + encodeURIComponent(html) : "")
+		 + (js.length > 0 ? (html.length > 0 ? "&" : "") + "js=" + encodeURIComponent(js) : "")
+		 + (css.length > 0 ? (html.length > 0 || js.length > 0 ? "&" : "") + "css=" + encodeURIComponent(css) : "");
 	var textArea = document.createElement("textarea");
 	textArea.id = "page_" + randomGuid();
 	textArea.className = "cool-border";
