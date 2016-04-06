@@ -490,26 +490,18 @@ function textareaToEditor(textareaId, withResult) {
 	}
 }
 
-function encryptText(text) {
-	var status = { result: null, progress: 0 };
-	LZMA.compress(text, 1, function onSuccess(result) {
-		status.result = result;
-	}, function onProgress(percent) {
-		status.progress = percent;	
-	});
-	while (status.progress < 1) {}
-	return status.result;
-}
-
 function TesterGeneratePageUrl() {
 	var pasteZone = document.getElementById("pasteZone");
-	var html = LZString.compressToEncodedURIComponent(getMixedEditor().getValue());
-	var js = LZString.compressToEncodedURIComponent(getJSEditor().getValue());
-	var css = LZString.compressToEncodedURIComponent(getCSSEditor().getValue());
+	var html = getMixedEditor().getValue();
+	if (html.trim().length > 0) html = LZString.compressToEncodedURIComponent(html);
+	var js = getJSEditor().getValue();
+	if (js.trim().length > 0) js = LZString.compressToEncodedURIComponent(js);
+	var css = getCSSEditor().getValue();
+	if (css.trim().length > 0) css = LZString.compressToEncodedURIComponent(css);
 	var qs = window.location.origin + window.location.pathname + "?"
-		 + (html.trim().length > 0 ? "html=" + html : "")
-		 + (js.trim().length > 0 ? (html.trim().length > 0 ? "&" : "") + "js=" + js : "")
-		 + (css.trim().length > 0 ? (html.trim().length > 0 || js.trim().length > 0 ? "&" : "") + "css=" + css : "");
+		 + (html.length > 0 ? "html=" + html : "")
+		 + (js.length > 0 ? (html.length > 0 ? "&" : "") + "js=" + js : "")
+		 + (css.length > 0 ? (html.length > 0 || js.length > 0 ? "&" : "") + "css=" + css : "");
 	var textArea = document.createElement("textarea");
 	textArea.id = "page_" + randomGuid();
 	textArea.className = "cool-border";
