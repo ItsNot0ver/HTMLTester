@@ -20,8 +20,8 @@ body {
 	background: -ms-linear-gradient(top, #085d96, #0d4f78);
 	background: -o-linear-gradient(top, #085d96, #0d4f78);
 	-moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  	border-radius: 4px;
+  	-webkit-border-radius: 4px;
 	-webkit-box-shadow: 0px 1px 1px black;
 	-moz-box-shadow: 0px 1px 1px black;
 	box-shadow: 0px 1px 1px black;
@@ -61,8 +61,8 @@ body {
 	background: -ms-linear-gradient(top, #085d96, #0d4f78);
 	background: -o-linear-gradient(top, #085d96, #0d4f78);
 	-moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-border-radius: 4px;
+  	border-radius: 4px;
+  	-webkit-border-radius: 4px;
 	-webkit-box-shadow: 0px 1px 1px black;
 	-moz-box-shadow: 0px 1px 1px black;
 	box-shadow: 0px 1px 1px black;
@@ -142,8 +142,8 @@ body {
 	background-color: #aaa;
 	border: none;
 	border-radius: 4px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
+  	-webkit-border-radius: 4px;
+  	-moz-border-radius: 4px;
 	-webkit-box-shadow: 0px 1px 1px black, inset 0px 2px 3px 0px rgba(0, 0, 0, .3);
 	-moz-box-shadow: 0px 1px 1px black, inset 0px 2px 3px 0px rgba(0, 0, 0, .3);
 	box-shadow: 0px 1px 1px black, inset 0px 2px 3px 0px rgba(0, 0, 0, .3);
@@ -173,6 +173,7 @@ body {
 	text-shadow: 0px 0px 1px #d0d0d0;
 	color: #0d4f78;
 	font-size: 16px;
+	font-family: Consolas;
 }
 
 .cool-border {
