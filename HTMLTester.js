@@ -558,6 +558,6 @@ function queryString(key) {
 function pasteZoneCheck() {
 	var table = document.getElementById("pasteTable");
 	var zone = document.getElementById("pasteZone");
-	table.style.display = zone.children.length > 0 ? "block" : "none";
+	table.style.display = zone.children.length > 0 ? "table" : "none";
 }
 
