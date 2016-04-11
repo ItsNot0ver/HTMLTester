@@ -344,11 +344,9 @@ function TesterImageOpen() {
 					]);
 					return false;
 				};
-				textArea.onload = function(e) {
-					window.scrollTo(0, document.body.scrollHeight);	
-				};
 				pasteZone.appendChild(textArea);
 				pasteZoneCheck();
+				window.scrollTo(0, document.body.scrollHeight);	
 				openFile.value = null;
 			};
 			reader.readAsDataURL(file);
@@ -532,11 +530,9 @@ function TesterGeneratePageUrl() {
 		]);
 		return false;
 	};
-	textArea.onload = function(e) {
-		window.scrollTo(0, document.body.scrollHeight);	
-	};
 	pasteZone.appendChild(textArea);
 	pasteZoneCheck();
+	window.scrollTo(0, document.body.scrollHeight);	
 }
 
 function queryString(key) {
