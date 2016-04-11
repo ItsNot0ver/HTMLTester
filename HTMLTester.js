@@ -147,17 +147,17 @@ function TesterLoad() {
 	editor.setOptions({
 		enableBasicAutocompletion: true,
 		enableSnippets: true,
-		enableLiveAutocompletion: true
+		enableLiveAutocompletion: false
 	});
 	jsEditor.setOptions({
 		enableBasicAutocompletion: true,
 		enableSnippets: true,
-		enableLiveAutocompletion: true
+		enableLiveAutocompletion: false
 	});
 	cssEditor.setOptions({
 		enableBasicAutocompletion: true,
 		enableSnippets: true,
-		enableLiveAutocompletion: true
+		enableLiveAutocompletion: false
 	});
 	
 	document.getElementById("TesterMixed").classList.add("cool-border");
