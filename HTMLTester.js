@@ -344,8 +344,10 @@ function TesterImageOpen() {
 					]);
 					return false;
 				};
+				textArea.onload = function(e) {
+					window.scrollTo(0, document.body.scrollHeight);	
+				};
 				pasteZone.appendChild(textArea);
-				window.scrollTo(0, document.body.scrollHeight);
 				pasteZoneCheck();
 				openFile.value = null;
 			};
@@ -530,8 +532,10 @@ function TesterGeneratePageUrl() {
 		]);
 		return false;
 	};
+	textArea.onload = function(e) {
+		window.scrollTo(0, document.body.scrollHeight);	
+	};
 	pasteZone.appendChild(textArea);
-	window.scrollTo(0, document.body.scrollHeight);
 	pasteZoneCheck();
 }
 
