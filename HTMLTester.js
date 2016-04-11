@@ -339,14 +339,14 @@ function TesterImageOpen() {
 						},
 						{ 
 							description: "Remove Image", 
-							action: function() { pasteZone.removeChild(textArea); } 
+							action: function() { pasteZone.removeChild(textArea); pasteZoneCheck(); } 
 						}
 					]);
 					return false;
 				};
 				pasteZone.appendChild(textArea);
 				window.scrollTo(0, document.body.scrollHeight);
-				//textareaToEditor(textArea.id, false);
+				pasteZoneCheck();
 				openFile.value = null;
 			};
 			reader.readAsDataURL(file);
@@ -525,13 +525,14 @@ function TesterGeneratePageUrl() {
 			},
 			{ 
 				description: "Remove URL", 
-				action: function() { pasteZone.removeChild(textArea); } 
+				action: function() { pasteZone.removeChild(textArea); pasteZoneCheck(); } 
 			}
 		]);
 		return false;
 	};
 	pasteZone.appendChild(textArea);
 	window.scrollTo(0, document.body.scrollHeight);
+	pasteZoneCheck();
 }
 
 function queryString(key) {
@@ -552,5 +553,11 @@ function queryString(key) {
         }
     }
     return null;
+}
+
+function pasteZoneCheck() {
+	var table = document.getElementById("pasteTable");
+	var zone = document.getElementById("pasteZone");
+	table.style.display = zone.children.length > 0 ? "block" : "none";
 }
 
