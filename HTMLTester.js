@@ -345,6 +345,7 @@ function TesterImageOpen() {
 					return false;
 				};
 				pasteZone.appendChild(textArea);
+				window.scrollTo(0, document.body.scrollHeight);
 				//textareaToEditor(textArea.id, false);
 				openFile.value = null;
 			};
@@ -530,6 +531,7 @@ function TesterGeneratePageUrl() {
 		return false;
 	};
 	pasteZone.appendChild(textArea);
+	window.scrollTo(0, document.body.scrollHeight);
 }
 
 function queryString(key) {
