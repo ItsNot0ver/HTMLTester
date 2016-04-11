@@ -12,6 +12,8 @@ body {
 	vertical-align: top;
 	border: none;
 	cursor: pointer;
+	font-family: Orbitron;
+	font-size: 12px;
 	border-top: 1px solid #286eab;
 	background: #0d4f78;
 	background: -webkit-gradient(linear, left top, left bottom, from(#085d96), to(#0d4f78));
@@ -50,6 +52,8 @@ body {
 .cool-label label {
 	vertical-align: top;
 	border: none;
+	font-family: Orbitron;
+	font-size: 12px;
 	cursor: pointer;
 	border-top: 1px solid #286eab;
 	padding: 0px 4px 1px 4px;
