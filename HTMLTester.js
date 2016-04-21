@@ -415,9 +415,9 @@ function showContextMenu (x, y, itemArray) {
 	cmUl.onclick = removeThis;
 	var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
 	if (typeof document.addEventListener != "undefined")
-		document.addEventListener(mousewheelevt, function(e) { debugger; removeThis(); e.currentTarget.removeEventListener(e.type, arguments.callee); }, false);
+		document.addEventListener(mousewheelevt, function(e) { e.currentTarget.removeEventListener(e.type, arguments.callee); removeThis(); }, false);
 	else
-		document.attachEvent("on"+mousewheelevt, function(e) { removeThis(); e = window.event || e; e.currentTarget.detachEvent(e.type, arguments.callee); });
+		document.attachEvent("on"+mousewheelevt, function(e) { e = window.event || e; e.currentTarget.detachEvent(e.type, arguments.callee); removeThis(); });
 	cmDiv.appendChild(cmUl);
 	document.body.appendChild(cmDiv);
 	if (cmUl.clientWidth < 150) cmUl.style.width = "150px";
