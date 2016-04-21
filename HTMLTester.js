@@ -411,7 +411,9 @@ function showContextMenu (x, y, itemArray) {
 	var cmLiCancel = document.createElement("li");
 	cmLiCancel.appendChild(document.createTextNode("Cancel"));
 	cmUl.appendChild(cmLiCancel);
-	cmUl.onclick = function () { document.body.removeChild(cmDiv); };
+	var removeThis = function () { document.body.removeChild(cmDiv); }
+	cmUl.onclick = removeThis;
+	cmUl.onscroll = removeThis;
 	cmDiv.appendChild(cmUl);
 	document.body.appendChild(cmDiv);
 	if (cmUl.clientWidth < 150) cmUl.style.width = "150px";
