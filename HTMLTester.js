@@ -399,7 +399,8 @@ function showContextMenu (x, y, itemArray) {
 	cmDiv.className = "cool-contextmenu";
 	cmDiv.tabIndex = -1;
 	cmDiv.style.zIndex = 0x7FFFFFFD;
-	cmDiv.onblur = function() { document.body.removeChild(cmDiv); };
+	var removeThis = function () { document.body.removeChild(cmDiv); };
+	cmDiv.onblur = removeThis;
 	var cmUl = document.createElement("ul");
 	for (var i = 0; i < itemArray.length; i++) {
 		var item = itemArray[i];
@@ -411,13 +412,12 @@ function showContextMenu (x, y, itemArray) {
 	var cmLiCancel = document.createElement("li");
 	cmLiCancel.appendChild(document.createTextNode("Cancel"));
 	cmUl.appendChild(cmLiCancel);
-	var removeThis = function () { document.body.removeChild(cmDiv); };
 	cmUl.onclick = removeThis;
 	var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
 	if (typeof document.addEventListener != "undefined")
-		document.addEventListener(mousewheelevt, function(e) { debugger; removeThis(); document.removeEventListener(e.type, arguments.callee); }, false);
+		document.addEventListener(mousewheelevt, function(e) { removeThis(); e.currentTarget.removeEventListener(e.type, arguments.callee); }, false);
 	else
-		document.attachEvent("on"+mousewheelevt, function(e) { removeThis(); e = window.event || e; document.detachEvent(e.type, arguments.callee); });
+		document.attachEvent("on"+mousewheelevt, function(e) { removeThis(); e = window.event || e; e.currentTarget.detachEvent(e.type, arguments.callee); });
 	cmDiv.appendChild(cmUl);
 	document.body.appendChild(cmDiv);
 	if (cmUl.clientWidth < 150) cmUl.style.width = "150px";
