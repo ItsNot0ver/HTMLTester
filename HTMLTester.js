@@ -399,7 +399,14 @@ function showContextMenu (x, y, itemArray) {
 	cmDiv.className = "cool-contextmenu";
 	cmDiv.tabIndex = -1;
 	cmDiv.style.zIndex = 0x7FFFFFFD;
-	var removeThis = function () { document.body.removeChild(cmDiv); };
+	var cmID = "cm_" + randomGuid();
+	cmDiv.id = cmID;
+	var removeThis = function () { 
+		var cm = document.getElementById(cmID);
+		if (cm) {
+			document.body.removeChild(cm);
+		}
+	};
 	cmDiv.onblur = removeThis;
 	var cmUl = document.createElement("ul");
 	for (var i = 0; i < itemArray.length; i++) {
