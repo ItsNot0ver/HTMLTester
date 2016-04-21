@@ -415,7 +415,7 @@ function showContextMenu (x, y, itemArray) {
 	cmUl.onclick = removeThis;
 	var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
 	if (typeof document.addEventListener != "undefined")
-		document.addEventListener(mousewheelevt, function(e) { removeThis(); e.currentTarget.removeEventListener(e.type, arguments.callee); }, false);
+		document.addEventListener(mousewheelevt, function(e) { debugger; removeThis(); e.currentTarget.removeEventListener(e.type, arguments.callee); }, false);
 	else
 		document.attachEvent("on"+mousewheelevt, function(e) { removeThis(); e = window.event || e; e.currentTarget.detachEvent(e.type, arguments.callee); });
 	cmDiv.appendChild(cmUl);
