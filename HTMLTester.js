@@ -411,13 +411,13 @@ function showContextMenu (x, y, itemArray) {
 	var cmLiCancel = document.createElement("li");
 	cmLiCancel.appendChild(document.createTextNode("Cancel"));
 	cmUl.appendChild(cmLiCancel);
-	var removeThis = function () { document.body.removeChild(cmDiv); }
+	var removeThis = function () { document.body.removeChild(cmDiv); };
 	cmUl.onclick = removeThis;
 	var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
-	if (document.addEventListener)
-		document.addEventListener(mousewheelevt, removeThis, false);
+	if (typeof document.addEventListener != "undefined")
+		document.addEventListener(mousewheelevt, function(e) { removeThis(); e.target.removeEventListener(e.type, arguments.callee); }, false);
 	else
-		document.attachEvent("on"+mousewheelevt, removeThis);
+		document.attachEvent("on"+mousewheelevt, function(e) { removeThis(); e = window.event || e; e.target.detachEvent(e.type, arguments.callee); });
 	cmDiv.appendChild(cmUl);
 	document.body.appendChild(cmDiv);
 	if (cmUl.clientWidth < 150) cmUl.style.width = "150px";
