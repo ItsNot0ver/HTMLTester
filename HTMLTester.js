@@ -537,9 +537,21 @@ function TesterGeneratePageUrl() {
 				}
 			},
 			{
-				description: "Go to URL",	
+				description: "Open URL",	
 				action: function() {
 					window.location.href = qs;
+				}
+			},
+			{
+				description: "Open in a new tab",	
+				action: function() {
+					var a = document.createElement("a");
+					a.style.display = "none";
+					a.href = qs;
+					a.target = "_blank";
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
 				}
 			},
 			{ 
