@@ -8,6 +8,37 @@ body {
 	min-height: 300px;
 }
 
+.cool-ribbon {
+	position: fixed;
+	top: 20px;
+	right: -80px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.cool-ribbon a {
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	appearance: button;
+	text-decoration: none;
+	font-family: Orbitron;
+	font-size: 12px;
+	padding: 7px 100px 7px 100px;
+	border: none;
+	background: #0d4f78;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-webkit-box-shadow: 0px 1px 1px black;
+	-moz-box-shadow: 0px 1px 1px black;
+	box-shadow: 0px 1px 1px black;
+	text-shadow: 0px 0px 1px #4d4d4d;
+	color: white;
+}
+
 .cool-button button {
 	vertical-align: top;
 	border: none;
