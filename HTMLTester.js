@@ -329,7 +329,7 @@ function TesterImageOpen() {
 				textArea.readOnly = true;
 				textArea.oncontextmenu = function(e) {
 					e.returnValue = false;
-					showContextMenu(e.pageX, e.pageY, [
+					showContextMenu(e.clientX, e.clientY, [
 						{ 
 							description: "Copy HTML", 
 							action: function() {
@@ -528,7 +528,7 @@ function TesterGeneratePageUrl() {
 	textArea.readOnly = true;
 	textArea.oncontextmenu = function(e) {
 		e.returnValue = false;
-		showContextMenu(e.pageX, e.pageY, [
+		showContextMenu(e.clientX, e.clientY, [
 			{ 
 				description: "Copy URL", 
 				action: function() {
