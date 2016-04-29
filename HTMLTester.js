@@ -12,7 +12,7 @@ function getCSSEditor() {
 }
 
 function switchToMixed() {
-	document.getElementById("TesterMixed").style.display = "";a
+	document.getElementById("TesterMixed").style.display = "";
 	document.getElementById("TesterJS").style.display = "none";
 	document.getElementById("TesterCSS").style.display = "none";
 	document.getElementById("TesterMixedItem").classList.add("active");
