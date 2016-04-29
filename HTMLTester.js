@@ -12,7 +12,7 @@ function getCSSEditor() {
 }
 
 function switchToMixed() {
-	document.getElementById("TesterMixed").style.display = "";
+	document.getElementById("TesterMixed").style.display = "inline-block";
 	document.getElementById("TesterJS").style.display = "none";
 	document.getElementById("TesterCSS").style.display = "none";
 	document.getElementById("TesterMixedItem").classList.add("active");
@@ -23,7 +23,7 @@ function switchToMixed() {
 
 function switchToJS() {
 	document.getElementById("TesterMixed").style.display = "none";
-	document.getElementById("TesterJS").style.display = "";
+	document.getElementById("TesterJS").style.display = "inline-block";
 	document.getElementById("TesterCSS").style.display = "none";
 	document.getElementById("TesterMixedItem").classList.remove("active");
 	document.getElementById("TesterJSItem").classList.add("active");
@@ -34,7 +34,7 @@ function switchToJS() {
 function switchToCSS() {
 	document.getElementById("TesterMixed").style.display = "none";
 	document.getElementById("TesterJS").style.display = "none";
-	document.getElementById("TesterCSS").style.display = "";
+	document.getElementById("TesterCSS").style.display = "inline-block";
 	document.getElementById("TesterMixedItem").classList.remove("active");
 	document.getElementById("TesterJSItem").classList.remove("active");
 	document.getElementById("TesterCSSItem").classList.add("active");
