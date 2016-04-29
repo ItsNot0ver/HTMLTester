@@ -11,7 +11,7 @@ body {
 .cool-ribbon {
 	position: fixed;
 	top: 25px;
-	right: -80px;
+	margin: 0;
 	-webkit-transform: rotate(35deg);
 	-moz-transform: rotate(35deg);
 	-o-transform: rotate(35deg);
@@ -21,10 +21,13 @@ body {
 
 @media all and (max-width: 1216px) {
     .cool-ribbon {
-        margin-left: 0px;
-        margin-top: 0px;
-        left: 1000px;
-        top: -25px;
+        left: 995px;
+    }
+}
+
+@media all and (min-width: 1216px) {
+    .cool-ribbon {
+        right: -80px; 
     }
 }
 
@@ -36,6 +39,9 @@ body {
 	font-family: Orbitron;
 	font-size: 12px;
 	padding: 7px 100px 7px 100px;
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
 	border: none;
 	background: #0d4f78;
 	-moz-border-radius: 4px;
@@ -46,6 +52,7 @@ body {
 	box-shadow: 0px 1px 1px black;
 	text-shadow: 0px 0px 1px #4d4d4d;
 	color: gold;
+	white-space: nowrap;
 }
 
 .cool-button button {
