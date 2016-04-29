@@ -10,13 +10,13 @@ body {
 
 .cool-ribbon {
 	position: fixed;
-	top: 40px;
+	top: 25px;
 	right: -80px;
-	-webkit-transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform: rotate(45deg);
+	-webkit-transform: rotate(35deg);
+	-moz-transform: rotate(35deg);
+	-o-transform: rotate(35deg);
+	-ms-transform: rotate(35deg);
+	transform: rotate(35deg);
 }
 
 .cool-ribbon a {
