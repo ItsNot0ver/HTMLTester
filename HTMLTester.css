@@ -261,6 +261,9 @@ body {
     .cool-ribbon {
         left: 1016px;
     }
+    .cool-list {
+    	width: 137.297px;
+    }
 }
 
 @media all and (min-width: 1216px) {
