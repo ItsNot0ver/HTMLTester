@@ -9,7 +9,7 @@ body {
 }
 
 .cool-ribbon {
-	position: fixed;
+	position: absolute;
 	top: 25px;
 	right: -80px;
 	-webkit-transform: rotate(35deg);
