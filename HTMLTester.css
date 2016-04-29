@@ -19,6 +19,13 @@ body {
 	transform: rotate(35deg);
 }
 
+@media all and (max-width: 980px) {
+    .cool-ribbon {
+        margin-left: 0px;
+        left: 220px;
+    }
+}
+
 .cool-ribbon a {
 	-webkit-appearance: button;
 	-moz-appearance: button;
