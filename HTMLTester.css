@@ -9,7 +9,7 @@ body {
 }
 
 .cool-ribbon {
-	position: absolute;
+	position: fixed;
 	top: 25px;
 	right: -80px;
 	-webkit-transform: rotate(35deg);
@@ -22,9 +22,9 @@ body {
 @media all and (max-width: 1216px) {
     .cool-ribbon {
         margin-left: 0px;
-        /*margin-top: 0px;*/
-        left: 1091px;
-        top: 25px;
+        margin-top: 0px;
+        left: 1000px;
+        top: -25px;
     }
 }
 
