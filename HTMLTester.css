@@ -10,28 +10,16 @@ body {
 
 .cool-ribbon {
 	position: absolute;
-	top: 25px;
+	overflow: hidden;
+	top: 0px;
 	margin: 0;
-	-webkit-transform: rotate(35deg);
-	-moz-transform: rotate(35deg);
-	-o-transform: rotate(35deg);
-	-ms-transform: rotate(35deg);
-	transform: rotate(35deg);
-}
-
-@media all and (max-width: 1216px) {
-    .cool-ribbon {
-        left: 995px;
-    }
-}
-
-@media all and (min-width: 1216px) {
-    .cool-ribbon {
-        right: -80px; 
-    }
+	width: 200px;
+	height: 120px;
 }
 
 .cool-ribbon a {
+	position: absolute;
+	top: 20px;
 	-webkit-appearance: button;
 	-moz-appearance: button;
 	appearance: button;
@@ -44,15 +32,17 @@ body {
 	display: inline-block;
 	border: none;
 	background: #0d4f78;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	-webkit-border-radius: 4px;
 	-webkit-box-shadow: 0px 1px 1px black;
 	-moz-box-shadow: 0px 1px 1px black;
 	box-shadow: 0px 1px 1px black;
 	text-shadow: 0px 0px 1px #4d4d4d;
 	color: gold;
 	white-space: nowrap;
+	-webkit-transform: rotate(35deg);
+	-moz-transform: rotate(35deg);
+	-o-transform: rotate(35deg);
+	-ms-transform: rotate(35deg);
+	transform: rotate(35deg);
 }
 
 .cool-button button {
@@ -243,6 +233,7 @@ body {
 .cool-list {
 	position: absolute;
 	margin: 0;
+	padding: 0;
 	width: 10vw;
 	height: 95vh;
 	left: 0;
@@ -266,3 +257,14 @@ body {
 	background: #1b435e;
 }
             
+@media all and (max-width: 1216px) {
+    .cool-ribbon {
+        left: 995px;
+    }
+}
+
+@media all and (min-width: 1216px) {
+    .cool-ribbon {
+        right: 0px; 
+    }
+}
