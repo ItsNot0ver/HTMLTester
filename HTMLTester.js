@@ -536,6 +536,12 @@ function TesterGeneratePageUrl() {
 					document.execCommand('copy');
 				}
 			},
+			{
+				description: "Go to URL",	
+				action: function() {
+					window.location.href = qs;
+				}
+			},
 			{ 
 				description: "Remove URL", 
 				action: function() { pasteZone.removeChild(textArea); pasteZoneCheck(); } 
