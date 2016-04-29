@@ -395,7 +395,9 @@ function setCoolBorder(el) {
 }
 
 function showContextMenu (x, y, itemArray) {
+	var nullContextMenu = function(e) { e.returnValue = false; return false; };
 	var cmDiv = document.createElement("div");
+	cmDiv.oncontextmenu = nullContextMenu;
 	cmDiv.className = "cool-contextmenu";
 	cmDiv.tabIndex = -1;
 	cmDiv.style.zIndex = 0x7FFFFFFD;
@@ -409,14 +411,17 @@ function showContextMenu (x, y, itemArray) {
 	};
 	cmDiv.onblur = removeThis;
 	var cmUl = document.createElement("ul");
+	cmUl.oncontextmenu = nullContextMenu;
 	for (var i = 0; i < itemArray.length; i++) {
 		var item = itemArray[i];
 		var cmLi = document.createElement("li");
+		cmLi.oncontextmenu = nullContextMenu;
 		cmLi.appendChild(document.createTextNode(item.description));
 		cmLi.onclick = item.action;
 		cmUl.appendChild(cmLi);
 	}
 	var cmLiCancel = document.createElement("li");
+	cmLiCancel.oncontextmenu = nullContextMenu;
 	cmLiCancel.appendChild(document.createTextNode("Cancel"));
 	cmUl.appendChild(cmLiCancel);
 	cmUl.onclick = removeThis;
@@ -436,6 +441,7 @@ function showContextMenu (x, y, itemArray) {
 	}
 	if (x < 0) x = 0;
 	if (y < 0) y = 0;
+	// if position is absolute
 	/*x += document.body.scrollLeft;
 	y += document.body.scrollTop;*/
 	cmDiv.style.left = x.toString() + "px";
