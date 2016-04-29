@@ -188,8 +188,6 @@ function TesterLoad() {
 	editor.getSession().on('change', TesterOnCodeChange);
 	jsEditor.getSession().on('change', TesterOnCodeChange);
 	cssEditor.getSession().on('change', TesterOnCodeChange);
-	
-	document.getElementById("TesterMixed").style.display = "inline-block";
 }
 
 function TesterUpdate() {
