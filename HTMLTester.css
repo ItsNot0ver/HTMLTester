@@ -19,10 +19,12 @@ body {
 	transform: rotate(35deg);
 }
 
-@media all and (max-width: 980px) {
+@media all and (max-width: 1216px) {
     .cool-ribbon {
         margin-left: 0px;
-        left: 220px;
+        margin-top: 0px;
+        left: 1191px;
+        top: 25px;
     }
 }
 
