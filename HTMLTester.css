@@ -22,8 +22,8 @@ body {
 @media all and (max-width: 1216px) {
     .cool-ribbon {
         margin-left: 0px;
-        margin-top: 0px;
-        left: 1191px;
+        /*margin-top: 0px;*/
+        left: 1091px;
         top: 25px;
     }
 }
