@@ -213,7 +213,7 @@ function TesterUpdate() {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
 			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
-			tempFrame.contentDocument.head.appendChild(js);
+			tempFrame.contentDocument.body.appendChild(js);
 		}
 		var head = tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
