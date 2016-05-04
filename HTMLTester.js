@@ -178,11 +178,27 @@ function TesterLoad() {
 	if (js != null) {
 		jsEditor.setValue(LZString.decompressFromBase64(js));
 		jsEditor.clearSelection();
+		js = queryString("jsPos");
+		if (js != null) {
+			js = LZString.decompressFromBase64(js);
+			if (js == "head") {
+				document.getElementById("jsHead").checked = true;
+				document.getElementById("jsBody").checked = false;
+			}
+			else {
+				document.getElementById("jsHead").checked = false;
+				document.getElementById("jsBody").checked = true;
+			}
+		}
 	}
 	var css = queryString("css");
 	if (css != null) {
 		cssEditor.setValue(LZString.decompressFromBase64(css));
 		cssEditor.clearSelection();
+	}
+	var jquery = queryString("jquery");
+	if (jquery != null && LZString.decompressFromBase64(jquery) == "true") {
+		document.getElementById("jqueryFlag").checked = true;
 	}
 	//TesterUpdate();
 	editor.getSession().on('change', TesterOnCodeChange);
