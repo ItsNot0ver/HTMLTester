@@ -198,6 +198,16 @@ function TesterDownload() {
 	else download(text, fileName, fileType+";charset=utf-8");
 }
 
+function addAceEditorLabel(editorId, text) {
+	var div = document.createElement("div");
+	div.style.position = "absolute";
+	div.style.right = "5px"; 
+	div.style.zIndex = 9999; 
+	div.style.color = "#404040";
+	div.innerHTML = text;
+	document.getElementById(editorId).getElementsByClassName("ace_scroller")[0].appendChild(div);
+}
+
 function TesterLoad() {
 	switchToAll();
 	ace.require("ace/ext/language_tools");
@@ -269,6 +279,9 @@ function TesterLoad() {
 	editor.getSession().on('change', TesterOnCodeChange);
 	jsEditor.getSession().on('change', TesterOnCodeChange);
 	cssEditor.getSession().on('change', TesterOnCodeChange);
+	addAceEditorLabel("TesterMixed", "HTML");
+	addAceEditorLabel("TesterJS", "JS");
+	addAceEditorLabel("TesterCSS", "CSS");
 }
 
 function TesterUpdate() {
