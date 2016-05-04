@@ -2,6 +2,7 @@
 <html charset="utf-8" lang="en">
 	<head>
 		<script type="text/javascript">
+			debugger;
 			var jqueryIncluded = typeof $ != "undefined";
 		</script>
 		<title>HTML Tester</title>
@@ -80,6 +81,7 @@
 				    		<input type="checkbox" id="jqueryFlag"><label id="jqueryFlagLbl" style="margin-left: 60px;" for="jqueryFlag">Include JQuery</label>
 				    		<div id="jquerySupported">Your Browser supports JQuery</div>
 				    		<script type="text/javascript">
+				    			debugger;
 				    			if (jqueryIncluded) {
 				    				document.getElementById("jqueryFlag").style.display = "none";
 				    				document.getElementById("jqueryFlagLbl").style.display = "none";
