@@ -1,6 +1,9 @@
 <!DOCTYPE html> 
 <html charset="utf-8" lang="en">
 	<head>
+		<script type="text/javascript">
+			var jqueryIncluded = typeof $ != "undefined";
+		</script>
 		<title>HTML Tester</title>
 		<meta charset="utf-8">
 		<meta name="HTMLTester" value="notranslate">
@@ -74,7 +77,17 @@
 				    	    	Insert JS at the end of:
 		    				<input type="radio" id="jsHead" name="jsPos" value="head"><label for="jsHead">Head</label>
 				    		<input type="radio" id="jsBody" name="jsPos" value="body" checked><label for="jsBody">Body</label>
-				    		<input type="checkbox" id="jqueryFlag"><label style="margin-left: 60px;" for="jqueryFlag">Include JQuery</label>
+				    		<input type="checkbox" id="jqueryFlag"><label id="jqueryFlagLbl" style="margin-left: 60px;" for="jqueryFlag">Include JQuery</label>
+				    		<div id="jquerySupported">Your Browser supports JQuery</div>
+				    		<script type="text/javascript">
+				    			if (jqueryIncluded) {
+				    				document.getElementById("jqueryFlag").style.display = "none";
+				    				document.getElementById("jqueryFlagLbl").style.display = "none";
+				    			}
+				    			else {
+				    				document.getElementById("jquerySupported").style.display = "none";
+				    			}
+				    		</script>
 					</td>
 				</tr>
 		</table>
