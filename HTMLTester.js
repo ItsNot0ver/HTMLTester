@@ -208,7 +208,7 @@ function TesterUpdate() {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
 			js.src = "https://code.jquery.com/jquery-2.2.3.min.js";
-			tempFrame.contentDocument.head.appendChild(js);	
+			tempFrame.contentDocument.head.insertBefore(js, tempFrame.contentDocument.head.firstElementChild);
 		}
 		if (addCss) {
 			var css = tempFrame.contentDocument.createElement("style");
