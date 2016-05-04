@@ -114,7 +114,30 @@ body {
 	text-decoration: none;
 }
 
+.cool-label label:hover {
+	border-top-color: #28597a;
+	background: #28597a;
+	color: #eee;
+}
+
+.cool-label label:active {
+	border-top-color: #1b435e;
+	background: #1b435e;
+}
+
 .cool-label.disabled label {
+	border-top-color: #1b1b1b;
+	background: #5e5e5e;
+	color: #ccc;
+}
+
+.cool-label.disabled label:hover {
+	border-top-color: #1b1b1b;
+	background: #5e5e5e;
+	color: #ccc;
+}
+
+.cool-label.disabled label:active {
 	border-top-color: #1b1b1b;
 	background: #5e5e5e;
 	color: #ccc;
@@ -152,17 +175,6 @@ body {
 .cool-contextmenu li:hover {
 	background: #0080c0;
 	color: white;
-}
-
-.cool-label label:hover {
-	border-top-color: #28597a;
-	background: #28597a;
-	color: #eee;
-}
-
-.cool-label label:active {
-	border-top-color: #1b435e;
-	background: #1b435e;
 }
 
 .cool-checkbox input[type=checkbox] {
