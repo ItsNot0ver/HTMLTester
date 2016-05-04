@@ -12,38 +12,53 @@ function getCSSEditor() {
 }
 
 function switchToMixed() {
-	document.getElementById("TesterMixed").style.display = "inline-block";
+	var html = document.getElementById("TesterMixed");
+	html.style.height = "100%";
+	html.style.display = "inline-block";
 	document.getElementById("TesterJS").style.display = "none";
 	document.getElementById("TesterCSS").style.display = "none";
 	document.getElementById("TesterMixedItem").classList.add("active");
 	document.getElementById("TesterJSItem").classList.remove("active");
 	document.getElementById("TesterCSSItem").classList.remove("active");
-	document.getElementById("openFile").accept = ".htm,.html";
+	document.getElementById("TesterAllItem").classList.remove("active");
+	var open = document.getElementById("openFile");
+	open.disabled = "";
+	open.accept = ".htm,.html";
 }
 
 function switchToJS() {
+	var js = document.getElementById("TesterJS");
 	document.getElementById("TesterMixed").style.display = "none";
-	document.getElementById("TesterJS").style.display = "inline-block";
+	js.style.height = "100%";
+	js.style.display = "inline-block";
 	document.getElementById("TesterCSS").style.display = "none";
 	document.getElementById("TesterMixedItem").classList.remove("active");
 	document.getElementById("TesterJSItem").classList.add("active");
 	document.getElementById("TesterCSSItem").classList.remove("active");
-	document.getElementById("openFile").accept = ".js";
+	document.getElementById("TesterAllItem").classList.remove("active");
+	var open = document.getElementById("openFile");
+	open.disabled = "";
+	open.accept = ".js";
 }
 
 function switchToCSS() {
+	var css = document.getElementById("TesterCSS");
 	document.getElementById("TesterMixed").style.display = "none";
 	document.getElementById("TesterJS").style.display = "none";
-	document.getElementById("TesterCSS").style.display = "inline-block";
+	css.style.height = "100%";
+	css.style.display = "inline-block";
 	document.getElementById("TesterMixedItem").classList.remove("active");
 	document.getElementById("TesterJSItem").classList.remove("active");
 	document.getElementById("TesterCSSItem").classList.add("active");
-	document.getElementById("openFile").accept = ".css";
+	document.getElementById("TesterAllItem").classList.remove("active");
+	var open = document.getElementById("openFile");
+	open.disabled = "";
+	open.accept = ".css";
 }
 
 function switchToAll() {
 	var html = document.getElementById("TesterMixed");
-	var js = document.getElementById("TesterMixed");
+	var js = document.getElementById("TesterJS");
 	var css = document.getElementById("TesterCSS");
 	html.style.display = "inline-block";
 	html.style.height = "33%";
