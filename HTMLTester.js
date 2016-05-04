@@ -281,9 +281,13 @@ function TesterLoad() {
 	addAceEditorLabel("TesterMixed", "HTML");
 	addAceEditorLabel("TesterJS", "JS");
 	addAceEditorLabel("TesterCSS", "CSS");
-	var instantLoad = queryString("autoLoad");
-	if (instantLoad != null && instantLoad == "true") {
+	var command = queryString("autoLoad");
+	if (command != null && command == "true") {
 		TesterUpdate();
+	}
+	command = queryString("fullScreen");
+	if (command != null && command == "true") {
+		TesterFullScreen();
 	}
 }
 
