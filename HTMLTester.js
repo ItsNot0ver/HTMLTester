@@ -549,7 +549,10 @@ function TesterGeneratePageUrl() {
 	var qs = window.location.origin + window.location.pathname + "?"
 		 + (html.length > 0 ? "html=" + encodeURIComponent(html) : "")
 		 + (js.length > 0 ? (html.length > 0 ? "&" : "") + "js=" + encodeURIComponent(js) : "")
-		 + (css.length > 0 ? (html.length > 0 || js.length > 0 ? "&" : "") + "css=" + encodeURIComponent(css) : "");
+		 + (css.length > 0 ? (html.length > 0 || js.length > 0 ? "&" : "") + "css=" + encodeURIComponent(css) : "")
+		 + (js.length > 0 ? (document.getElementById("jsBody").checked ? "" : "&jsPos=head") : "")
+		 + (document.getElementById("jqueryFlag").checked ? (html.length > 0 || js.length > 0 || css.length > 0 ? "&" : "") + "jquery=true" : "");
+	
 	var textArea = document.createElement("textarea");
 	textArea.id = "page_" + randomGuid();
 	textArea.className = "cool-border";
