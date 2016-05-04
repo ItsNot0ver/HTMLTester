@@ -114,13 +114,7 @@ body {
 	text-decoration: none;
 }
 
-.cool-label input[type=checkbox]:disabled + label {
-	border-top-color: #1b1b1b;
-	background: #5e5e5e;
-	color: #ccc;
-}
-
-.cool-label input[type=radio]:disabled + label {
+.cool-label.disabled label {
 	border-top-color: #1b1b1b;
 	background: #5e5e5e;
 	color: #ccc;
