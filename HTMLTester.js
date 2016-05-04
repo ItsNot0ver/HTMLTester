@@ -24,6 +24,7 @@ function switchToMixed() {
 	var open = document.getElementById("openFile");
 	open.disabled = "";
 	open.accept = ".htm,.html";
+	document.getElementById("openFileSpan").classList.remove("disabled");
 }
 
 function switchToJS() {
@@ -39,6 +40,7 @@ function switchToJS() {
 	var open = document.getElementById("openFile");
 	open.disabled = "";
 	open.accept = ".js";
+	document.getElementById("openFileSpan").classList.remove("disabled");
 }
 
 function switchToCSS() {
@@ -54,6 +56,7 @@ function switchToCSS() {
 	var open = document.getElementById("openFile");
 	open.disabled = "";
 	open.accept = ".css";
+	document.getElementById("openFileSpan").classList.remove("disabled");
 }
 
 function switchToAll() {
@@ -71,6 +74,7 @@ function switchToAll() {
 	document.getElementById("TesterCSSItem").classList.remove("active");
 	document.getElementById("TesterAllItem").classList.add("active");
 	document.getElementById("openFile").disabled = true;
+	document.getElementById("openFileSpan").classList.add("disabled");
 }
 
 function renderHtml(html, iframeId) {
