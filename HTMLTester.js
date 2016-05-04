@@ -41,6 +41,23 @@ function switchToCSS() {
 	document.getElementById("openFile").accept = ".css";
 }
 
+function switchToAll() {
+	var html = document.getElementById("TesterMixed");
+	var js = document.getElementById("TesterMixed");
+	var css = document.getElementById("TesterCSS");
+	html.style.display = "inline-block";
+	html.style.height = "33%";
+	js.style.display = "inline-block";
+	js.style.height = "33%";
+	css.style.display = "inline-block";
+	css.style.height = "33%";
+	document.getElementById("TesterMixedItem").classList.remove("active");
+	document.getElementById("TesterJSItem").classList.remove("active");
+	document.getElementById("TesterCSSItem").classList.remove("active");
+	document.getElementById("TesterAllItem").classList.add("active");
+	document.getElementById("openFile").disabled = true;
+}
+
 function renderHtml(html, iframeId) {
 	var iframe = document.getElementById(iframeId);
 	iframe.contentDocument.open();
