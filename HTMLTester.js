@@ -203,6 +203,12 @@ function TesterUpdate() {
 		tempFrame.contentDocument.write(getMixedEditor().getValue());
 		tempFrame.contentDocument.close();*/
 		renderHtml(getMixedEditor().getValue(), tempFrame.id);
+		if (document.getElementById("jqueryFlag").checked) {
+			var js = tempFrame.contentDocument.createElement("script");
+			js.type = "text/javascript";
+			js.src = "https://code.jquery.com/jquery-2.2.3.min.js";
+			tempFrame.contentDocument.head.appendChild(js);	
+		}
 		if (addCss) {
 			var css = tempFrame.contentDocument.createElement("style");
 			css.type = "text/css";
@@ -213,7 +219,12 @@ function TesterUpdate() {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
 			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
-			tempFrame.contentDocument.body.appendChild(js);
+			if (document.getElementById("jsBody").checked) {
+				tempFrame.contentDocument.body.appendChild(js);
+			}
+			else {
+				tempFrame.contentDocument.head.appendChild(js);	
+			}
 		}
 		var head = tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
