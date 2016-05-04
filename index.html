@@ -26,9 +26,9 @@
 								<th class="cool-text" align="left" colspan="3">Code:</th>
 							</tr>	
 							<tr>
-								<td valign="bottom" align="left" style="width: 45%; white-space: nowrap;" class="cool-button cool-label">
+								<td valign="bottom" align="left" style="width: 45%; white-space: nowrap;" class="cool-button">
 									<button onclick="TesterClear()">Clear current</button>&nbsp;
-									<input id="openFile" type="file" accept=".htm,.html" style="display: none;" onchange="TesterFileOpen()" /><label for="openFile">Open</label>&nbsp;
+									<span id="openFileSpan" class="cool-label"><input id="openFile" type="file" accept=".htm,.html" style="display: none;" onchange="TesterFileOpen()" /><label for="openFile">Open</label></span>&nbsp;
 									<button onclick="TesterDownload()">Download</button>
 								</td>
 								<td valign="bottom" align="center" style="width: 40%; white-space: nowrap;" class="cool-checkbox cool-text">
