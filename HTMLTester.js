@@ -138,35 +138,64 @@ function randomGuid() {
 }
 
 function TesterDownload() {
-	var editor, fileType, fileName;
-	if (document.getElementById("TesterMixed").style.display != "none") {
-		editor = getMixedEditor();
-		fileType = "text/html";
-		fileName = "TestedPage_" + randomGuid() + ".html";
+	var text, fileType, fileName;
+	fileType = "text/html";
+	fileName = "TestedPage_" + randomGuid() + ".html";
+	var addCss = getCSSEditor().getValue().trim().length > 1;
+	var addJs = getJSEditor().getValue().trim().length > 1;
+	var addJQuery = document.getElementById("jqueryFlag").checked;
+	if (addCss || addJs || addJQuery) {
+		var tempFrame = document.createElement("iframe");
+		tempFrame.id = "tempFrame_" + randomGuid();
+		tempFrame.style.display = "none";
+		tempFrame.sandbox = "allow-same-origin";
+		document.body.appendChild(tempFrame);
+		/*tempFrame.contentDocument.open();
+		tempFrame.contentDocument.write(getMixedEditor().getValue());
+		tempFrame.contentDocument.close();*/
+		renderHtml(getMixedEditor().getValue(), tempFrame.id);
+		if (addJQuery) {
+			var js = tempFrame.contentDocument.createElement("script");
+			js.type = "text/javascript";
+			js.src = "https://code.jquery.com/jquery-2.2.3.min.js";
+			tempFrame.contentDocument.head.insertBefore(js, tempFrame.contentDocument.head.firstElementChild);
+		}
+		if (addCss) {
+			var css = tempFrame.contentDocument.createElement("style");
+			css.type = "text/css";
+			css.appendChild(tempFrame.contentDocument.createTextNode(getCSSEditor().getValue()));
+			tempFrame.contentDocument.head.appendChild(css);
+		}
+		if (addJs) {
+			var js = tempFrame.contentDocument.createElement("script");
+			js.type = "text/javascript";
+			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
+			if (document.getElementById("jsBody").checked) {
+				tempFrame.contentDocument.body.appendChild(js);
+			}
+			else {
+				tempFrame.contentDocument.head.appendChild(js);	
+			}
+		}
+		var head = tempFrame.contentDocument.head.outerHTML;
+		var body = tempFrame.contentDocument.body.outerHTML;
+		document.body.removeChild(tempFrame);
+		text = "<html>\n\t" + head + "\n\t" + body + "\n</html>\n";
 	}
-	else if (document.getElementById("TesterJS").style.display != "none") {
-		editor = getJSEditor();
-		fileType = "text/javascript";
-		fileName = "TestedScript_" + randomGuid() + ".js";
-	}
-	else if (document.getElementById("TesterCSS").style.display != "none") {
-		editor = getCSSEditor();
-		fileType = "text/css";
-		fileName = "TestedStyles_" + randomGuid() + ".css";
-	}
+	else text = getMixedEditor().getValue();
 	if (typeof window.chrome != "undefined") { 
 		fileName = prompt("Insert filename", fileName);
 		if (fileName !== null && fileName !== "") {
 			var fileNamePattern = /^[0-9a-zA-Z_ ... ]+$/;
 			if (fileNamePattern.test(fileName)) {
-				download(editor.getValue(), fileName, fileType+";charset=utf-8");
+				download(text, fileName, fileType+";charset=utf-8");
 			}
 			else {
 				alert("Filename is invalid");
 			}
 		}
 	}
-	else download(editor.getValue(), fileName, fileType+";charset=utf-8");
+	else download(text, fileName, fileType+";charset=utf-8");
 }
 
 function TesterLoad() {
@@ -303,10 +332,10 @@ function TesterClear() {
 		editor.setValue("<!DOCTYPE html>\n<html>\n\t<head>\n\t\t\n\t</head>\n\t<body>\n\t\t\n\t</body>\n</html>\n");
 		editor.clearSelection();
 	}
-	else if (document.getElementById("TesterJS").style.display != "none") {
+	if (document.getElementById("TesterJS").style.display != "none") {
 		getJSEditor().setValue("");
 	}
-	else if (document.getElementById("TesterCSS").style.display != "none") {
+	if (document.getElementById("TesterCSS").style.display != "none") {
 		getCSSEditor().setValue("");
 	}
 	//TesterUpdate();
