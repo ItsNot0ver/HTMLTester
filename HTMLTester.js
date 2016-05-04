@@ -180,7 +180,6 @@ function TesterLoad() {
 		jsEditor.clearSelection();
 		js = queryString("jsPos");
 		if (js != null) {
-			js = LZString.decompressFromBase64(js);
 			if (js == "head") {
 				document.getElementById("jsHead").checked = true;
 				document.getElementById("jsBody").checked = false;
@@ -197,7 +196,7 @@ function TesterLoad() {
 		cssEditor.clearSelection();
 	}
 	var jquery = queryString("jquery");
-	if (jquery != null && LZString.decompressFromBase64(jquery) == "true") {
+	if (jquery != null && jquery == "true") {
 		document.getElementById("jqueryFlag").checked = true;
 	}
 	//TesterUpdate();
