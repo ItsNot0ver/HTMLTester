@@ -24,7 +24,7 @@ function switchToMixed() {
 	var open = document.getElementById("openFile");
 	open.disabled = "";
 	open.accept = ".htm,.html";
-	document.getElementById("openFileSpan").classList.remove("disabled");
+	document.getElementById("openFileSpan").style.display = "inline";
 }
 
 function switchToJS() {
@@ -40,7 +40,7 @@ function switchToJS() {
 	var open = document.getElementById("openFile");
 	open.disabled = "";
 	open.accept = ".js";
-	document.getElementById("openFileSpan").classList.remove("disabled");
+	document.getElementById("openFileSpan").style.display = "inline";
 }
 
 function switchToCSS() {
@@ -56,7 +56,7 @@ function switchToCSS() {
 	var open = document.getElementById("openFile");
 	open.disabled = "";
 	open.accept = ".css";
-	document.getElementById("openFileSpan").classList.remove("disabled");
+	document.getElementById("openFileSpan").style.display = "inline";
 }
 
 function switchToAll() {
@@ -74,7 +74,7 @@ function switchToAll() {
 	document.getElementById("TesterCSSItem").classList.remove("active");
 	document.getElementById("TesterAllItem").classList.add("active");
 	document.getElementById("openFile").disabled = true;
-	document.getElementById("openFileSpan").classList.add("disabled");
+	document.getElementById("openFileSpan").style.display = "none";
 }
 
 function renderHtml(html, iframeId) {
@@ -199,6 +199,7 @@ function TesterDownload() {
 }
 
 function TesterLoad() {
+	switchToAll();
 	ace.require("ace/ext/language_tools");
 	var editor = getMixedEditor();
 	var jsEditor = getJSEditor();
