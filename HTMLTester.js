@@ -1,4 +1,4 @@
-﻿
+
 function getMixedEditor() {
 	return ace.edit("TesterMixed");
 }
@@ -193,7 +193,8 @@ function TesterLoad() {
 function TesterUpdate() {
 	var addCss = getCSSEditor().getValue().trim().length > 1;
 	var addJs = getJSEditor().getValue().trim().length > 1;
-	if (addCss || addJs) {
+	var addJQuery = document.getElementById("jqueryFlag").checked;
+	if (addCss || addJs || addJQuery) {
 		var tempFrame = document.createElement("iframe");
 		tempFrame.id = "tempFrame_" + randomGuid();
 		tempFrame.style.display = "none";
@@ -203,7 +204,7 @@ function TesterUpdate() {
 		tempFrame.contentDocument.write(getMixedEditor().getValue());
 		tempFrame.contentDocument.close();*/
 		renderHtml(getMixedEditor().getValue(), tempFrame.id);
-		if (document.getElementById("jqueryFlag").checked) {
+		if (addJQuery) {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
 			js.src = "https://code.jquery.com/jquery-2.2.3.min.js";
