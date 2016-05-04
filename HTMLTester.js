@@ -275,13 +275,16 @@ function TesterLoad() {
 	if (jquery != null && jquery == "true") {
 		document.getElementById("jqueryFlag").checked = true;
 	}
-	//TesterUpdate();
 	editor.getSession().on('change', TesterOnCodeChange);
 	jsEditor.getSession().on('change', TesterOnCodeChange);
 	cssEditor.getSession().on('change', TesterOnCodeChange);
 	addAceEditorLabel("TesterMixed", "HTML");
 	addAceEditorLabel("TesterJS", "JS");
 	addAceEditorLabel("TesterCSS", "CSS");
+	var instantLoad = queryString("autoLoad");
+	if (instantLoad != null && instantLoad == "true") {
+		TesterUpdate();
+	}
 }
 
 function TesterUpdate() {
