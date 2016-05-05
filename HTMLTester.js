@@ -4,7 +4,8 @@ var beautifyOptions = {
     indent_with_tabs: true,
     preserve_newlines: true,
     max_preserve_newlines: 1,
-    extra_liners: ""
+    extra_liners: "",
+    end_with_newline: true
 };
 
 function getMixedEditor() {
