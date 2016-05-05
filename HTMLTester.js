@@ -2,7 +2,7 @@
 var beautifyOptions = { 
     indent_inner_html: true,
     indent_with_tabs: true,
-    preserve_newlines: true,
+    preserve_newlines: false,
     max_preserve_newlines: 1,
     extra_liners: "",
     end_with_newline: true
