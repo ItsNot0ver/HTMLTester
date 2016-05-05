@@ -1,4 +1,12 @@
 
+var beautifyOptions = { 
+    indent_inner_html: true,
+    indent_with_tabs: true,
+    preserve_newlines: true,
+    max_preserve_newlines: 1,
+    extra_liners: ""
+};
+
 function getMixedEditor() {
 	return ace.edit("TesterMixed");
 }
@@ -183,7 +191,7 @@ function TesterDownload() {
 		text = "<html>\n\t" + head + "\n\t" + body + "\n</html>\n";
 	}
 	else text = getMixedEditor().getValue();
-	text = html_beautify(text, null);
+	text = html_beautify(text, beautifyOptions);
 	if (typeof window.chrome != "undefined") { 
 		fileName = prompt("Insert filename", fileName);
 		if (fileName !== null && fileName !== "") {
@@ -366,17 +374,17 @@ function TesterClear() {
 function TesterBeautify() {
 	if (document.getElementById("TesterMixed").style.display != "none") {
 		var editor = getMixedEditor();
-		editor.setValue(html_beautify(editor.getValue(), null));
+		editor.setValue(html_beautify(editor.getValue(), beautifyOptions));
 		editor.clearSelection();
 	}
 	if (document.getElementById("TesterJS").style.display != "none") {
 		var editor = getJSEditor();
-		editor.setValue(js_beautify(editor.getValue(), null));
+		editor.setValue(js_beautify(editor.getValue(), beautifyOptions));
 		editor.clearSelection();
 	}
 	if (document.getElementById("TesterCSS").style.display != "none") {
 		var editor = getCSSEditor();
-		editor.setValue(css_beautify(editor.getValue(), null));
+		editor.setValue(css_beautify(editor.getValue(), beautifyOptions));
 		editor.clearSelection();
 	}
 }
