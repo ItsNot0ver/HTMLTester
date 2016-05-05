@@ -183,6 +183,7 @@ function TesterDownload() {
 		text = "<html>\n\t" + head + "\n\t" + body + "\n</html>\n";
 	}
 	else text = getMixedEditor().getValue();
+	text = html_beautify(text, null);
 	if (typeof window.chrome != "undefined") { 
 		fileName = prompt("Insert filename", fileName);
 		if (fileName !== null && fileName !== "") {
@@ -360,6 +361,24 @@ function TesterClear() {
 		getCSSEditor().setValue("");
 	}
 	//TesterUpdate();
+}
+
+function TesterBeautify() {
+	if (document.getElementById("TesterMixed").style.display != "none") {
+		var editor = getMixedEditor();
+		editor.setValue(html_beautify(editor.getValue(), null));
+		editor.clearSelection();
+	}
+	if (document.getElementById("TesterJS").style.display != "none") {
+		var editor = getJSEditor();
+		editor.setValue(js_beautify(editor.getValue(), null));
+		editor.clearSelection();
+	}
+	if (document.getElementById("TesterCSS").style.display != "none") {
+		var editor = getCSSEditor();
+		editor.setValue(css_beautify(editor.getValue(), null));
+		editor.clearSelection();
+	}
 }
 
 function TesterOnCodeChange() {
