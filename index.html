@@ -12,6 +12,9 @@
 		<script src="./ace-noconflict/ace.js" type="text/javascript"></script>
 		<script src="./ace-noconflict/ext-language_tools.js" type="text/javascript"></script>
 		<script src="./libs/lz-string.min.js" type="text/javascript"></script>
+		<script src="./libs/beautify.js" type="text/javascript"></script>
+		<script src="./libs/beautify-html.js" type="text/javascript"></script>
+		<script src="./libs/beautify-css.js" type="text/javascript"></script>
 		<script src="./HTMLTester.js" type="text/javascript"></script>
 	</head>
 	<body onload="TesterLoad()">
@@ -28,6 +31,7 @@
 							<tr>
 								<td valign="bottom" align="left" style="width: 45%; white-space: nowrap;" class="cool-button">
 									<button onclick="TesterClear()">Clear code</button>&nbsp;
+									<button onclick="TesterBeautify()">Beautify</button>&nbsp;
 									<span id="openFileSpan" class="cool-label"><input id="openFile" type="file" accept=".htm,.html" style="display: none;" onchange="TesterFileOpen()" /><label for="openFile">Open</label>&nbsp;</span>
 									<button onclick="TesterDownload()">Download</button>
 								</td>
