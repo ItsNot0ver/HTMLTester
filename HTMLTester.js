@@ -375,18 +375,24 @@ function TesterClear() {
 function TesterBeautify() {
 	if (document.getElementById("TesterMixed").style.display != "none") {
 		var editor = getMixedEditor();
-		editor.setValue(html_beautify(editor.getValue(), beautifyOptions));
-		editor.clearSelection();
+		if (editor.getValue().trim().length > 1) {
+			editor.setValue(html_beautify(editor.getValue(), beautifyOptions));
+			editor.clearSelection();
+		}
 	}
 	if (document.getElementById("TesterJS").style.display != "none") {
 		var editor = getJSEditor();
-		editor.setValue(js_beautify(editor.getValue(), beautifyOptions));
-		editor.clearSelection();
+		if (editor.getValue().trim().length > 1) {
+			editor.setValue(js_beautify(editor.getValue(), beautifyOptions));
+			editor.clearSelection();
+		}
 	}
 	if (document.getElementById("TesterCSS").style.display != "none") {
 		var editor = getCSSEditor();
-		editor.setValue(css_beautify(editor.getValue(), beautifyOptions));
-		editor.clearSelection();
+		if (editor.getValue().trim().length > 1) {
+			editor.setValue(css_beautify(editor.getValue(), beautifyOptions));
+			editor.clearSelection();
+		}
 	}
 }
 
