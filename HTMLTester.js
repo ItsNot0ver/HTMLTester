@@ -121,14 +121,14 @@ function download(text, fileName, type) {
 		a.style.display = "none";
 		document.body.appendChild(a);
 		try {
-		/*	if (document.createEvent) {
+			if (document.createEvent) {
 				var e = document.createEvent("MouseEvents");
 				e.initEvent("click", true, true);
 				a.dispatchEvent(e);
 			}
-			else {*/
+			else {
 				a.click();
-		/*	}*/
+			}
 		}
 		finally {
 	  	document.body.removeChild(a);
