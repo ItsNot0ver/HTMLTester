@@ -147,6 +147,11 @@ function randomGuid() {
 				 randomFourDigitHex() + randomFourDigitHex() + randomFourDigitHex() + randomFourDigitHex();
 }
 
+function GetHTMLFromDocument(doc) {
+	var doctype = '<!DOCTYPE ' + doc.doctype.name + (doc.doctype.publicId ? ' PUBLIC "' + doc.doctype.publicId + '"' : '') + (!doc.doctype.publicId && doc.doctype.systemId ? ' SYSTEM' : '') + (doc.doctype.systemId ? ' "' + doc.doctype.systemId + '"' : '') + '>\n';
+	return doctype + doc.documentElement.outerHTML;
+}
+
 function GetFullCode() {
 	var addCss = getCSSEditor().getValue().trim().length > 1;
 	var addJs = getJSEditor().getValue().trim().length > 1;
@@ -181,11 +186,9 @@ function GetFullCode() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var doctype = "xxx";
-		var head = tempFrame.contentDocument.head.outerHTML;
-		var body = tempFrame.contentDocument.body.outerHTML;
+		var html = GetHTMLFromDocument(tempFrame.contentDocument);
 		document.body.removeChild(tempFrame);
-		return doctype + "\n<html>\n\t" + head + "\n\t" + body + "\n</html>\n";
+		return html;
 	}
 	return getMixedEditor().getValue();
 }
@@ -327,12 +330,10 @@ function TesterPushJS() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var doctype = "xxx";
-		var head = tempFrame.contentDocument.head.outerHTML;
-		var body = tempFrame.contentDocument.body.outerHTML;
+		var html = GetHTMLFromDocument(tempFrame.contentDocument);
 		document.body.removeChild(tempFrame);
 		getJSEditor().setValue("");
-		getMixedEditor().setValue(html_beautify(doctype + "\n<html>\n\t" + head + "\n\t" + body + "\n</html>\n", beautifyOptions));
+		getMixedEditor().setValue(html_beautify(html, beautifyOptions));
 		getMixedEditor().clearSelection();
 	}
 }
