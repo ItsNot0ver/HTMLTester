@@ -381,7 +381,9 @@ function TesterPushJS() {
 		var head = tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
 		document.body.removeChild(tempFrame);
+		getJSEditor().setValue("");
 		getMixedEditor().setValue(html_beautify("<html>\n\t" + head + "\n\t" + body + "\n</html>\n", beautifyOptions));
+		getMixedEditor().clearSelection();
 	}
 }
 
