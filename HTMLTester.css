@@ -4,8 +4,8 @@ body {
 	font-family: Calibri; 
 	font-size: 14px;
 	margin: 0;
-	min-width: 1216px;
-	min-height: 300px;
+	min-width: 1295;
+	min-height: 510px;
 }
 
 .cool-ribbon {
@@ -288,16 +288,16 @@ body {
 	background: #1b435e;
 }
             
-@media all and (max-width: 1216px) {
+@media all and (max-width: 1295px) {
     .cool-ribbon {
-        left: 1016px;
+        left: 1095px;
     }
     .cool-list {
-    	width: 121.797px;
+    	width: 118px;
     }
 }
 
-@media all and (min-width: 1216px) {
+@media all and (min-width: 1295px) {
     .cool-ribbon {
         right: 0px; 
     }
