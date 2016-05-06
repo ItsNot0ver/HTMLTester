@@ -147,10 +147,7 @@ function randomGuid() {
 				 randomFourDigitHex() + randomFourDigitHex() + randomFourDigitHex() + randomFourDigitHex();
 }
 
-function TesterDownload() {
-	var text, fileType, fileName;
-	fileType = "text/html";
-	fileName = "TestedPage_" + randomGuid() + ".html";
+function GetFullCode() {
 	var addCss = getCSSEditor().getValue().trim().length > 1;
 	var addJs = getJSEditor().getValue().trim().length > 1;
 	var addJQuery = document.getElementById("jqueryFlag").checked;
@@ -160,9 +157,6 @@ function TesterDownload() {
 		tempFrame.style.display = "none";
 		tempFrame.sandbox = "allow-same-origin";
 		document.body.appendChild(tempFrame);
-		/*tempFrame.contentDocument.open();
-		tempFrame.contentDocument.write(getMixedEditor().getValue());
-		tempFrame.contentDocument.close();*/
 		renderHtml(getMixedEditor().getValue(), tempFrame.id);
 		if (addJQuery) {
 			var js = tempFrame.contentDocument.createElement("script");
@@ -187,13 +181,20 @@ function TesterDownload() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var head = tempFrame.contentDocument.doctype + "\n" + tempFrame.contentDocument.head.outerHTML;
+		var doctype = "xxx";
+		var head = tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
 		document.body.removeChild(tempFrame);
-		text = "<html>\n\t" + head + "\n\t" + body + "\n</html>\n";
+		return doctype + "\n<html>\n\t" + head + "\n\t" + body + "\n</html>\n";
 	}
-	else text = getMixedEditor().getValue();
-	text = html_beautify(text, beautifyOptions);
+	return getMixedEditor().getValue();
+}
+
+function TesterDownload() {
+	var text, fileType, fileName;
+	fileType = "text/html";
+	fileName = "TestedPage_" + randomGuid() + ".html";
+	text = html_beautify(GetFullCode(), beautifyOptions);
 	if (typeof window.chrome != "undefined") { 
 		fileName = prompt("Insert filename", fileName);
 		if (fileName !== null && fileName !== "") {
@@ -303,59 +304,7 @@ function TesterLoad() {
 }
 
 function TesterUpdate() {
-	var addCss = getCSSEditor().getValue().trim().length > 1;
-	var addJs = getJSEditor().getValue().trim().length > 1;
-	var addJQuery = document.getElementById("jqueryFlag").checked;
-	if (addCss || addJs || addJQuery) {
-		var tempFrame = document.createElement("iframe");
-		tempFrame.id = "tempFrame_" + randomGuid();
-		tempFrame.style.display = "none";
-		tempFrame.sandbox = "allow-same-origin";
-		document.body.appendChild(tempFrame);
-		/*tempFrame.contentDocument.open();
-		tempFrame.contentDocument.write(getMixedEditor().getValue());
-		tempFrame.contentDocument.close();*/
-		renderHtml(getMixedEditor().getValue(), tempFrame.id);
-		if (addJQuery) {
-			var js = tempFrame.contentDocument.createElement("script");
-			js.type = "text/javascript";
-			js.src = "https://code.jquery.com/jquery-2.2.3.min.js";
-			tempFrame.contentDocument.head.insertBefore(js, tempFrame.contentDocument.head.firstElementChild);
-		}
-		if (addCss) {
-			var css = tempFrame.contentDocument.createElement("style");
-			css.type = "text/css";
-			css.appendChild(tempFrame.contentDocument.createTextNode(getCSSEditor().getValue()));
-			tempFrame.contentDocument.head.appendChild(css);
-		}
-		if (addJs) {
-			var js = tempFrame.contentDocument.createElement("script");
-			js.type = "text/javascript";
-			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
-			if (document.getElementById("jsBody").checked) {
-				tempFrame.contentDocument.body.appendChild(js);
-			}
-			else {
-				tempFrame.contentDocument.head.appendChild(js);	
-			}
-		}
-		var head = tempFrame.contentDocument.doctype + "\n" + tempFrame.contentDocument.head.outerHTML;
-		var body = tempFrame.contentDocument.body.outerHTML;
-		document.body.removeChild(tempFrame);
-		renderHtml("<html>\n\t" + head + "\n\t" + body + "\n</html>\n", "TesterResult");
-	}
-	else renderHtml(getMixedEditor().getValue(), "TesterResult");
-	// OLD WAY
-	/*renderHtml(getMixedEditor().getValue(), "TesterResult"); 
-	var frame = document.getElementById("TesterResult");
-	var css = frame.contentDocument.createElement("style");
-	css.type = "text/css";
-	css.appendChild(frame.contentDocument.createTextNode(getCSSEditor().getValue()));
-	frame.contentDocument.head.appendChild(css);
-	var js = frame.contentDocument.createElement("script");
-	js.type = "text/javascript";
-	js.appendChild(frame.contentDocument.createTextNode(getJSEditor().getValue()));
-	frame.contentDocument.head.appendChild(js);*/
+	renderHtml(GetFullCode(), "TesterResult");
 }
 
 function TesterPushJS() {
@@ -378,11 +327,12 @@ function TesterPushJS() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var head = tempFrame.contentDocument.doctype + "\n" + tempFrame.contentDocument.head.outerHTML;
+		var doctype = "xxx";
+		var head = tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
 		document.body.removeChild(tempFrame);
 		getJSEditor().setValue("");
-		getMixedEditor().setValue(html_beautify("<html>\n\t" + head + "\n\t" + body + "\n</html>\n", beautifyOptions));
+		getMixedEditor().setValue(html_beautify(doctype + "\n<html>\n\t" + head + "\n\t" + body + "\n</html>\n", beautifyOptions));
 		getMixedEditor().clearSelection();
 	}
 }
