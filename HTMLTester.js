@@ -187,7 +187,7 @@ function TesterDownload() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var head = tempFrame.contentDocument.head.outerHTML;
+		var head = tempFrame.contentDocument.doctype + "\n" + tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
 		document.body.removeChild(tempFrame);
 		text = "<html>\n\t" + head + "\n\t" + body + "\n</html>\n";
@@ -339,7 +339,7 @@ function TesterUpdate() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var head = tempFrame.contentDocument.head.outerHTML;
+		var head = tempFrame.contentDocument.doctype + "\n" + tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
 		document.body.removeChild(tempFrame);
 		renderHtml("<html>\n\t" + head + "\n\t" + body + "\n</html>\n", "TesterResult");
@@ -378,7 +378,7 @@ function TesterPushJS() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var head = tempFrame.contentDocument.head.outerHTML;
+		var head = tempFrame.contentDocument.doctype + "\n" + tempFrame.contentDocument.head.outerHTML;
 		var body = tempFrame.contentDocument.body.outerHTML;
 		document.body.removeChild(tempFrame);
 		getJSEditor().setValue("");
