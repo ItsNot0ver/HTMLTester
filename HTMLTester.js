@@ -358,6 +358,33 @@ function TesterUpdate() {
 	frame.contentDocument.head.appendChild(js);*/
 }
 
+function TesterPushJS() {
+	var addJs = getJSEditor().getValue().trim().length > 1;
+	if (addJs) {
+		var tempFrame = document.createElement("iframe");
+		tempFrame.id = "tempFrame_" + randomGuid();
+		tempFrame.style.display = "none";
+		tempFrame.sandbox = "allow-same-origin";
+		document.body.appendChild(tempFrame);
+		renderHtml(getMixedEditor().getValue(), tempFrame.id);
+		if (addJs) {
+			var js = tempFrame.contentDocument.createElement("script");
+			js.type = "text/javascript";
+			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
+			if (document.getElementById("jsBody").checked) {
+				tempFrame.contentDocument.body.appendChild(js);
+			}
+			else {
+				tempFrame.contentDocument.head.appendChild(js);	
+			}
+		}
+		var head = tempFrame.contentDocument.head.outerHTML;
+		var body = tempFrame.contentDocument.body.outerHTML;
+		document.body.removeChild(tempFrame);
+		getMixedEditor().setValue(html_beautify("<html>\n\t" + head + "\n\t" + body + "\n</html>\n", beautifyOptions));
+	}
+}
+
 function TesterClear() {
 	if (document.getElementById("TesterMixed").style.display != "none") {
 		var editor = getMixedEditor();
