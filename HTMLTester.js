@@ -89,6 +89,8 @@ function switchToAll() {
 
 function renderHtml(html, iframeId) {
 	var iframe = document.getElementById(iframeId);
+	iframe.contentWindow.location.reload();
+	iframe.contentDocument.location.reload();
 	iframe.contentDocument.open();
 	iframe.contentDocument.write(html);
 	iframe.contentDocument.close();
