@@ -35,7 +35,6 @@ function switchToMixed() {
 	open.disabled = "";
 	open.accept = ".htm,.html";
 	document.getElementById("openFileSpan").style.display = "inline";
-	window.fireEvent('resize');
 }
 
 function switchToJS() {
@@ -52,7 +51,6 @@ function switchToJS() {
 	open.disabled = "";
 	open.accept = ".js";
 	document.getElementById("openFileSpan").style.display = "inline";
-	window.fireEvent('resize');
 }
 
 function switchToCSS() {
@@ -69,7 +67,6 @@ function switchToCSS() {
 	open.disabled = "";
 	open.accept = ".css";
 	document.getElementById("openFileSpan").style.display = "inline";
-	window.fireEvent('resize');
 }
 
 function switchToAll() {
@@ -88,7 +85,6 @@ function switchToAll() {
 	document.getElementById("TesterAllItem").classList.add("active");
 	document.getElementById("openFile").disabled = true;
 	document.getElementById("openFileSpan").style.display = "none";
-	window.fireEvent('resize');
 }
 
 function renderHtml(html, iframeId) {
