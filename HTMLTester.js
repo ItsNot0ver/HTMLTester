@@ -15,23 +15,22 @@ function hookTimers(wnd) {
 	var originalSetInterval = wnd.setInterval;
 	var originalSetTimeout = wnd.setTimeout;
 	wnd.setInterval = function(proc, delay) {
-		debugger;
 		intervals.push(originalSetInterval(proc, delay));	
 	};
 	wnd.setTimeout = function(proc, delay) {
-		debugger;
 		timeouts.push(originalSetTimeout(proc, delay));	
 	};
 }
 function clearHookedTimers(wnd) {
-	debugger;
 	var i;
 	for (i = 0; i < intervals.length; i++) {
 		wnd.clearInterval(intervals[i]);
 	}
+	intervals = [];
 	for (i = 0; i < timeouts.length; i++) {
 		wnd.clearTimeout(timeouts[i]);
 	}
+	timeouts = [];
 }
 
 function fireResize() {
