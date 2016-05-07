@@ -258,7 +258,20 @@ function addAceEditorLabel(editorId, text) {
 }
 
 function TesterLoad() {
-	switchToAll();
+	var page = queryString("page");
+	switch (page) {
+		case "html":
+			break;
+		case "js":
+			switchToJS();
+			break;
+		case "css":
+			switchToCSS();
+			break;
+		default:
+			switchToAll();
+			break;
+	}
 	ace.require("ace/ext/language_tools");
 	var editor = getMixedEditor();
 	var jsEditor = getJSEditor();
