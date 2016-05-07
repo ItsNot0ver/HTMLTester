@@ -9,6 +9,30 @@ var beautifyOptions = {
     end_with_newline: true
 };
 
+var intervals = [];
+var timeouts = [];
+function hookTimers(wnd) {
+	var originalSetInterval = wnd.setInterval;
+	var originalSetTimeout = wnd.setTimeout;
+	wnd.setInterval = function(proc, delay) {
+		debugger;
+		intervals.push(originalSetInterval(proc, delay));	
+	};
+	wnd.setTimeout = function(proc, delay) {
+		debugger;
+		timeouts.push(originalSetTimeout(proc, delay));	
+	};
+}
+function clearHookedTimers(wnd) {
+	var i;
+	for (i = 0; i < intervals.length; i++) {
+		wnd.clearInterval(intervals[i]);
+	}
+	for (i = 0; i < timeouts.length; i++) {
+		wnd.clearTimeout(timeouts[i]);
+	}
+}
+
 function fireResize() {
 	var e = document.createEvent('Event');
 	e.initEvent('resize', true, true);
@@ -306,6 +330,10 @@ function TesterLoad() {
 	addAceEditorLabel("TesterMixed", "HTML");
 	addAceEditorLabel("TesterJS", "JS");
 	addAceEditorLabel("TesterCSS", "CSS");
+	
+	debugger;
+	hookTimers(document.getElementById("TesterResult").contentWindow);
+	
 	var command = queryString("autoLoad");
 	if (command != null && command == "true") {
 		TesterUpdate();
