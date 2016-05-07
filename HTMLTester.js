@@ -121,11 +121,15 @@ function switchToAll() {
 	fireResize();
 }
 
-function renderHtml(html, iframeId) {
-	var iframe = document.getElementById(iframeId);
-	iframe.contentDocument.open();
-	iframe.contentDocument.write(html);
-	iframe.contentDocument.close();
+function renderHtml(html, iframe) {
+	var ifrw = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
+	ifrw.document.open();
+	ifrw.document.write(html);  
+	ifrw.document.close();
+	if (ifrw.document.body && !ifrw.document.body.isContentEditable) {
+		ifrw.document.body.contentEditable = true;
+		ifrw.document.body.contentEditable = false;
+	}
 	return iframe;
 }
 
@@ -196,7 +200,7 @@ function GetFullCode() {
 		tempFrame.style.display = "none";
 		tempFrame.sandbox = "allow-same-origin";
 		document.body.appendChild(tempFrame);
-		renderHtml(getMixedEditor().getValue(), tempFrame.id);
+		renderHtml(getMixedEditor().getValue(), tempFrame);
 		if (addJQuery) {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
@@ -357,11 +361,6 @@ function TesterLoad() {
 }
 
 function TesterUpdate() {
-	//OLD WAY
-	//clearHookedTimers(document.getElementById("TesterResult").contentWindow);
-	//renderHtml(GetFullCode(), "TesterResult");
-	
-	//<iframe id="TesterResult" class="cool-border" style="background: white; width: 100%; height: 100%; display: inline-block;"></iframe>
 	var html = GetFullCode(), wrapper = document.getElementById("TesterResultWrapper"), frame;
 	wrapper.innerHTML = "";
 	frame = document.createElement("iframe");
@@ -372,9 +371,7 @@ function TesterUpdate() {
 	frame.style.height = "100%";
 	frame.style.display = "inline-block";
 	wrapper.appendChild(frame);
-	frame.contentDocument.open();
-	frame.contentDocument.write(html);
-	frame.contentDocument.close();
+	renderHtml(html, frame);
 }
 
 function TesterPushJS() {
@@ -385,7 +382,7 @@ function TesterPushJS() {
 		tempFrame.style.display = "none";
 		tempFrame.sandbox = "allow-same-origin";
 		document.body.appendChild(tempFrame);
-		renderHtml(getMixedEditor().getValue(), tempFrame.id);
+		renderHtml(getMixedEditor().getValue(), tempFrame);
 		if (addJs) {
 			var js = tempFrame.contentDocument.createElement("script");
 			js.type = "text/javascript";
@@ -697,9 +694,9 @@ function textareaToEditor(textareaId, withResult) {
 			frame.style.background = "white";
 			setCoolBorder(frame);
 			rightTd.appendChild(frame);
-			renderHtml(txt, textareaId + "Result");
+			renderHtml(txt, frame);
 			editor.getSession().on('change', function() {
-				renderHtml(editor.getValue(), textareaId + "Result");
+				renderHtml(editor.getValue(), frame);
 			});
 		}
 	}
