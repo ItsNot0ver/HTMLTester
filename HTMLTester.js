@@ -9,6 +9,12 @@ var beautifyOptions = {
     end_with_newline: true
 };
 
+function fireResize() {
+	var e = document.createEvent('Event');
+	e.initEvent('resize', true, true);
+	document.body.dispatchEvent(e);
+}
+
 function getMixedEditor() {
 	return ace.edit("TesterMixed");
 }
@@ -35,6 +41,7 @@ function switchToMixed() {
 	open.disabled = "";
 	open.accept = ".htm,.html";
 	document.getElementById("openFileSpan").style.display = "inline";
+	fireResize();
 }
 
 function switchToJS() {
@@ -51,6 +58,7 @@ function switchToJS() {
 	open.disabled = "";
 	open.accept = ".js";
 	document.getElementById("openFileSpan").style.display = "inline";
+	fireResize();
 }
 
 function switchToCSS() {
@@ -67,6 +75,7 @@ function switchToCSS() {
 	open.disabled = "";
 	open.accept = ".css";
 	document.getElementById("openFileSpan").style.display = "inline";
+	fireResize();
 }
 
 function switchToAll() {
@@ -85,6 +94,7 @@ function switchToAll() {
 	document.getElementById("TesterAllItem").classList.add("active");
 	document.getElementById("openFile").disabled = true;
 	document.getElementById("openFileSpan").style.display = "none";
+	fireResize();
 }
 
 function renderHtml(html, iframeId) {
