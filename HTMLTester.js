@@ -24,6 +24,7 @@ function hookTimers(wnd) {
 	};
 }
 function clearHookedTimers(wnd) {
+	debugger;
 	var i;
 	for (i = 0; i < intervals.length; i++) {
 		wnd.clearInterval(intervals[i]);
@@ -331,7 +332,6 @@ function TesterLoad() {
 	addAceEditorLabel("TesterJS", "JS");
 	addAceEditorLabel("TesterCSS", "CSS");
 	
-	debugger;
 	hookTimers(document.getElementById("TesterResult").contentWindow);
 	
 	var command = queryString("autoLoad");
@@ -345,6 +345,7 @@ function TesterLoad() {
 }
 
 function TesterUpdate() {
+	clearHookedTimers(document.getElementById("TesterResult").contentWindow);
 	renderHtml(GetFullCode(), "TesterResult");
 }
 
