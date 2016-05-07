@@ -344,7 +344,7 @@ function TesterLoad() {
 	addAceEditorLabel("TesterJS", "JS");
 	addAceEditorLabel("TesterCSS", "CSS");
 	
-	hookTimers(document.getElementById("TesterResult").contentWindow);
+	//hookTimers(document.getElementById("TesterResult").contentWindow);
 	
 	var command = queryString("autoLoad");
 	if (command != null && command == "true") {
@@ -357,8 +357,24 @@ function TesterLoad() {
 }
 
 function TesterUpdate() {
-	clearHookedTimers(document.getElementById("TesterResult").contentWindow);
-	renderHtml(GetFullCode(), "TesterResult");
+	//OLD WAY
+	//clearHookedTimers(document.getElementById("TesterResult").contentWindow);
+	//renderHtml(GetFullCode(), "TesterResult");
+	
+	//<iframe id="TesterResult" class="cool-border" style="background: white; width: 100%; height: 100%; display: inline-block;"></iframe>
+	var html = GetFullCode(), wrapper = document.getElementById("TesterResultWrapper"), frame;
+	wrapper.innerHTML = "";
+	frame = document.createElement("iframe");
+	frame.id = "TesterResult";
+	frame.className = "cool-border";
+	frame.style.background = "white";
+	frame.style.width = "100%";
+	frame.style.height = "100%";
+	frame.style.display = "inline-block";
+	wrapper.appendChild(frame);
+	frame.contentDocument.open();
+	frame.contentDocument.write(html);
+	frame.contentDocument.close();
 }
 
 function TesterPushJS() {
