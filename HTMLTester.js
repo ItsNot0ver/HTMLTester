@@ -126,7 +126,14 @@ function renderHtml(html, iframe) {
 	ifrw.document.open();
 	ifrw.document.write(html);  
 	ifrw.document.close();
-	debugger;
+	return iframe;
+}
+
+function renderHtmlFix(html, iframe) {
+	var ifrw = (iframe.contentWindow) ? iframe.contentWindow : (iframe.contentDocument.document) ? iframe.contentDocument.document : iframe.contentDocument;
+	ifrw.document.open();
+	ifrw.document.write(html);  
+	ifrw.document.close();
 	if (ifrw.document.body && !ifrw.document.body.isContentEditable) {
 		ifrw.document.body.contentEditable = true;
 		ifrw.document.body.contentEditable = false;
@@ -372,7 +379,7 @@ function TesterUpdate() {
 	frame.style.height = "100%";
 	frame.style.display = "inline-block";
 	wrapper.appendChild(frame);
-	renderHtml(html, frame);
+	renderHtmlFix(html, frame);
 }
 
 function TesterPushJS() {
