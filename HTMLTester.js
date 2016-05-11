@@ -126,6 +126,7 @@ function renderHtml(html, iframe) {
 	ifrw.document.open();
 	ifrw.document.write(html);  
 	ifrw.document.close();
+	debugger;
 	if (ifrw.document.body && !ifrw.document.body.isContentEditable) {
 		ifrw.document.body.contentEditable = true;
 		ifrw.document.body.contentEditable = false;
