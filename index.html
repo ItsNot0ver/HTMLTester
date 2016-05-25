@@ -79,7 +79,7 @@
 				</tr>
 				<tr>
 					<td style="white-space: nowrap; width: 50%;" class="cool-text cool-checkbox cool-button">
-				    	    	<table>
+				    	    	<table style="display: inline;">
 						    <tr>
 						        <td>Insert JS at the </td>
 						        <td><input type="radio" id="jsBegin" name="jsInnerPos" value="begin" checked=""><label for="jsBegin">Beginning</label></td>
@@ -93,6 +93,7 @@
 						        <td><input type="radio" id="jsBody" name="jsPos" value="body" checked=""><label for="jsBody">Body</label></td>
 						    </tr>
 						</table>
+						<button style="margin-left: 5px;" onclick="TesterPushJS()">Push JS</button>
 						<input type="checkbox" id="jqueryFlag"><label id="jqueryFlagLbl" style="margin-left: 60px;" for="jqueryFlag">Include jQuery</label>
 				    		<span style="margin-left: 30px;" id="jquerySupported">Your Browser supports JQuery</span>
 				    		<script type="text/javascript">
