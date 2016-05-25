@@ -79,11 +79,20 @@
 				</tr>
 				<tr>
 					<td style="white-space: nowrap; width: 50%;" class="cool-text cool-checkbox cool-button">
-				    	    	Insert JS at the end of:
-		    				<input type="radio" id="jsHead" name="jsPos" value="head"><label for="jsHead">Head</label>
-				    		<input type="radio" id="jsBody" name="jsPos" value="body" checked><label for="jsBody">Body</label>
-				    		<button style="margin-left: 5px;" onclick="TesterPushJS()">Push JS</button>
-				    		<input type="checkbox" id="jqueryFlag"><label id="jqueryFlagLbl" style="margin-left: 60px;" for="jqueryFlag">Include jQuery</label>
+				    	    	<table>
+						    <tr>
+						        <td>Insert JS at the </td>
+						        <td><input type="radio" id="jsBegin" name="jsInnerPos" value="begin" checked=""><label for="jsBegin">Beginning</label></td>
+						        <td>of</td>
+						        <td><input type="radio" id="jsHead" name="jsPos" value="head"><label for="jsHead">Head</label></td>
+						    </tr>
+						    <tr>
+						        <td></td>
+						        <td><input type="radio" id="jsEnd" name="jsInnerPos" value="end" checked=""><label for="jsEnd">End</label></td>
+						        <td></td>
+						        <td><input type="radio" id="jsBody" name="jsPos" value="body" checked=""><label for="jsBody">Body</label></td>
+						    </tr>
+						</table>
 				    		<span style="margin-left: 30px;" id="jquerySupported">Your Browser supports JQuery</span>
 				    		<script type="text/javascript">
 				    			if (jqueryIncluded) {
