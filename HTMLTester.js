@@ -231,7 +231,7 @@ function GetFullCode() {
 					ifrw.document.body.appendChild(js);
 				}
 				else {
-					ifrw.document.insertBefore(js, ifrw.document.body.firstElementChild);
+					ifrw.document.body.insertBefore(js, ifrw.document.body.firstElementChild);
 				}
 			}
 			else {
@@ -239,7 +239,7 @@ function GetFullCode() {
 					ifrw.document.head.appendChild(js);
 				}
 				else {
-					ifrw.document.insertBefore(js, ifrw.document.head.firstElementChild);
+					ifrw.document.head.insertBefore(js, ifrw.document.head.firstElementChild);
 				}
 			}
 		}
@@ -412,7 +412,7 @@ function TesterPushJS() {
 					ifrw.document.body.appendChild(js);
 				}
 				else {
-					ifrw.document.insertBefore(js, ifrw.document.body.firstElementChild);
+					ifrw.document.body.insertBefore(js, ifrw.document.body.firstElementChild);
 				}
 			}
 			else {
@@ -420,7 +420,7 @@ function TesterPushJS() {
 					ifrw.document.head.appendChild(js);
 				}
 				else {
-					ifrw.document.insertBefore(js, ifrw.document.head.firstElementChild);
+					ifrw.document.head.insertBefore(js, ifrw.document.head.firstElementChild);
 				}
 			}
 		}
