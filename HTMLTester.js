@@ -208,28 +208,39 @@ function GetFullCode() {
 		tempFrame.style.display = "none";
 		tempFrame.sandbox = "allow-same-origin";
 		document.body.appendChild(tempFrame);
+		var ifrw = (tempFrame.contentWindow) ? tempFrame.contentWindow : (tempFrame.contentDocument.document) ? tempFrame.contentDocument.document : tempFrame.contentDocument;
 		renderHtml(getMixedEditor().getValue(), tempFrame);
 		if (addJQuery) {
-			var js = tempFrame.contentDocument.createElement("script");
+			var js = ifrw.document.createElement("script");
 			js.type = "text/javascript";
 			js.src = "https://code.jquery.com/jquery-2.2.3.min.js";
-			tempFrame.contentDocument.head.insertBefore(js, tempFrame.contentDocument.head.firstElementChild);
+			ifrw.document.head.insertBefore(js, ifrw.document.head.firstElementChild);
 		}
 		if (addCss) {
-			var css = tempFrame.contentDocument.createElement("style");
+			var css = ifrw.document.createElement("style");
 			css.type = "text/css";
-			css.appendChild(tempFrame.contentDocument.createTextNode(getCSSEditor().getValue()));
-			tempFrame.contentDocument.head.appendChild(css);
+			css.appendChild(ifrw.document.createTextNode(getCSSEditor().getValue()));
+			ifrw.document.head.appendChild(css);
 		}
 		if (addJs) {
-			var js = tempFrame.contentDocument.createElement("script");
+			var js = ifrw.document.createElement("script");
 			js.type = "text/javascript";
-			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
+			js.appendChild(ifrw.document.createTextNode(getJSEditor().getValue()));
 			if (document.getElementById("jsBody").checked) {
-				tempFrame.contentDocument.body.appendChild(js);
+				if (document.getElementById("jsEnd").checked) {
+					ifrw.document.body.appendChild(js);
+				}
+				else {
+					ifrw.document.insertBefore(js, ifrw.document.body.firstElementChild);
+				}
 			}
 			else {
-				tempFrame.contentDocument.head.appendChild(js);	
+				if (document.getElementById("jsEnd").checked) {
+					ifrw.document.head.appendChild(js);
+				}
+				else {
+					ifrw.document.insertBefore(js, ifrw.document.head.firstElementChild);
+				}
 			}
 		}
 		var html = GetHTMLFromDocument(tempFrame.contentDocument);
