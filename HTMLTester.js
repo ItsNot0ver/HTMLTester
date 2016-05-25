@@ -214,7 +214,7 @@ function GetFullCode() {
 			var js = ifrw.document.createElement("script");
 			js.type = "text/javascript";
 			js.src = "https://code.jquery.com/jquery-2.2.3.min.js";
-			ifrw.document.head.insertBefore(js, ifrw.document.head.firstElementChild);
+			ifrw.document.head.insertBefore(js, ifrw.document.head.firstChild);
 		}
 		if (addCss) {
 			var css = ifrw.document.createElement("style");
@@ -231,7 +231,7 @@ function GetFullCode() {
 					ifrw.document.body.appendChild(js);
 				}
 				else {
-					ifrw.document.body.insertBefore(js, ifrw.document.body.firstElementChild);
+					ifrw.document.body.insertBefore(js, ifrw.document.body.firstChild);
 				}
 			}
 			else {
@@ -239,7 +239,7 @@ function GetFullCode() {
 					ifrw.document.head.appendChild(js);
 				}
 				else {
-					ifrw.document.head.insertBefore(js, ifrw.document.head.firstElementChild);
+					ifrw.document.head.insertBefore(js, ifrw.document.head.firstChild);
 				}
 			}
 		}
@@ -412,7 +412,7 @@ function TesterPushJS() {
 					ifrw.document.body.appendChild(js);
 				}
 				else {
-					ifrw.document.body.insertBefore(js, ifrw.document.body.firstElementChild);
+					ifrw.document.body.insertBefore(js, ifrw.document.body.firstChild);
 				}
 			}
 			else {
@@ -420,7 +420,7 @@ function TesterPushJS() {
 					ifrw.document.head.appendChild(js);
 				}
 				else {
-					ifrw.document.head.insertBefore(js, ifrw.document.head.firstElementChild);
+					ifrw.document.head.insertBefore(js, ifrw.document.head.firstChild);
 				}
 			}
 		}
