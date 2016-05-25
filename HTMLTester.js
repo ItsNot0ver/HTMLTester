@@ -243,7 +243,7 @@ function GetFullCode() {
 				}
 			}
 		}
-		var html = GetHTMLFromDocument(tempFrame.contentDocument);
+		var html = GetHTMLFromDocument(ifrw.document);
 		document.body.removeChild(tempFrame);
 		return html;
 	}
@@ -401,11 +401,12 @@ function TesterPushJS() {
 		tempFrame.style.display = "none";
 		tempFrame.sandbox = "allow-same-origin";
 		document.body.appendChild(tempFrame);
+		var ifrw = (tempFrame.contentWindow) ? tempFrame.contentWindow : (tempFrame.contentDocument.document) ? tempFrame.contentDocument.document : tempFrame.contentDocument;
 		renderHtml(getMixedEditor().getValue(), tempFrame);
 		if (addJs) {
-			var js = tempFrame.contentDocument.createElement("script");
+			var js = ifrw.document.createElement("script");
 			js.type = "text/javascript";
-			js.appendChild(tempFrame.contentDocument.createTextNode(getJSEditor().getValue()));
+			js.appendChild(ifrw.document.createTextNode(getJSEditor().getValue()));
 			if (document.getElementById("jsBody").checked) {
 				tempFrame.contentDocument.body.appendChild(js);
 			}
@@ -413,7 +414,7 @@ function TesterPushJS() {
 				tempFrame.contentDocument.head.appendChild(js);	
 			}
 		}
-		var html = GetHTMLFromDocument(tempFrame.contentDocument);
+		var html = GetHTMLFromDocument(ifrw.document);
 		document.body.removeChild(tempFrame);
 		getJSEditor().setValue("");
 		getMixedEditor().setValue(html_beautify(html, beautifyOptions));
