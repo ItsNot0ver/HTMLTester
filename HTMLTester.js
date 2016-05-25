@@ -408,10 +408,20 @@ function TesterPushJS() {
 			js.type = "text/javascript";
 			js.appendChild(ifrw.document.createTextNode(getJSEditor().getValue()));
 			if (document.getElementById("jsBody").checked) {
-				tempFrame.contentDocument.body.appendChild(js);
+				if (document.getElementById("jsEnd").checked) {
+					ifrw.document.body.appendChild(js);
+				}
+				else {
+					ifrw.document.insertBefore(js, ifrw.document.body.firstElementChild);
+				}
 			}
 			else {
-				tempFrame.contentDocument.head.appendChild(js);	
+				if (document.getElementById("jsEnd").checked) {
+					ifrw.document.head.appendChild(js);
+				}
+				else {
+					ifrw.document.insertBefore(js, ifrw.document.head.firstElementChild);
+				}
 			}
 		}
 		var html = GetHTMLFromDocument(ifrw.document);
